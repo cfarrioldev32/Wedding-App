@@ -1,5 +1,5 @@
 export const environment = {
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://wedding-app-5uen.onrender.com',
   useBackend: true,
   fallbackToLocalStorage: true
 };
