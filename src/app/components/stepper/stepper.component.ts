@@ -65,70 +65,49 @@ export class StepperComponent implements OnDestroy {
   @ViewChild(MatStepper) private stepper?: MatStepper;
 
   readonly questions: QuizQuestion[] = [
-    // TODO: Reemplazar textos, imagenes y puntajes con el contenido real del quiz.
+    // TODO: Copiar las imagenes a /public/quiz y actualizar estas rutas.
     {
       id: 'q1',
-      text: 'Como se conocio la pareja?',
-      imageUrl:
-        'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&auto=format&fit=crop',
-      imageAlt: 'Pareja en un parque',
+      text: 'Quien es esta persona?',
+      imageUrl: '/quiz/persona-1.png',
+      imageAlt: 'Persona 1',
       options: [
-        { id: 'A', label: 'En la universidad', points: 10 },
-        { id: 'B', label: 'En el trabajo', points: 0 },
-        { id: 'C', label: 'En una fiesta', points: 0 },
-        { id: 'D', label: 'Por amigos en comun', points: 0 }
+        { id: 'A', label: 'Amiga de la novia', points: 10 },
+        { id: 'B', label: 'Prima segunda del novio', points: 0 },
+        { id: 'C', label: 'Mejor amiga de la novia', points: 0 }
       ]
     },
     {
       id: 'q2',
-      text: 'Cual es el hobby favorito del novio?',
-      imageUrl:
-        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&auto=format&fit=crop',
-      imageAlt: 'Montanas y aventura',
+      text: 'A quien pertenece esta mascota?',
+      imageUrl: '/quiz/mascota-1.png',
+      imageAlt: 'Mascota',
       options: [
-        { id: 'A', label: 'Cocinar', points: 0 },
-        { id: 'B', label: 'Senderismo', points: 10 },
-        { id: 'C', label: 'Videojuegos', points: 0 },
-        { id: 'D', label: 'Fotografia', points: 0 }
+        { id: 'A', label: 'Perro de infancia del novio', points: 0 },
+        { id: 'B', label: 'Perro actual de la pareja', points: 0 },
+        { id: 'C', label: 'Ninguna de las anteriores', points: 10 }
       ]
     },
     {
       id: 'q3',
-      text: 'Cual es la cancion que mas los representa?',
-      imageUrl:
-        'https://images.unsplash.com/photo-1485579149621-3123dd979885?w=800&auto=format&fit=crop',
-      imageAlt: 'Pareja bailando',
+      text: 'Quien es esta persona?',
+      imageUrl: '/quiz/persona-2.png',
+      imageAlt: 'Persona 2',
       options: [
-        { id: 'A', label: 'Perfect - Ed Sheeran', points: 0 },
-        { id: 'B', label: 'A Thousand Years - Christina Perri', points: 10 },
-        { id: 'C', label: 'All of Me - John Legend', points: 0 },
-        { id: 'D', label: 'Yellow - Coldplay', points: 0 }
+        { id: 'A', label: 'Prima del novio', points: 10 },
+        { id: 'B', label: 'Vecina de la pareja', points: 0 },
+        { id: 'C', label: 'Amiga de la novia', points: 0 }
       ]
     },
     {
       id: 'q4',
-      text: 'A que ciudad sueñan con viajar juntos?',
-      imageUrl:
-        'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&auto=format&fit=crop',
-      imageAlt: 'Ciudad iluminada',
+      text: 'Donde se tomo esta foto?',
+      imageUrl: '/quiz/foto-roma.png',
+      imageAlt: 'Foto en Roma',
       options: [
-        { id: 'A', label: 'Paris', points: 10 },
-        { id: 'B', label: 'Tokio', points: 0 },
-        { id: 'C', label: 'Nueva York', points: 0 },
-        { id: 'D', label: 'Roma', points: 0 }
-      ]
-    },
-    {
-      id: 'q5',
-      text: 'Quien dijo \"te amo\" primero?',
-      imageUrl:
-        'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&auto=format&fit=crop',
-      imageAlt: 'Pareja sonriendo',
-      options: [
-        { id: 'A', label: 'La novia', points: 10 },
-        { id: 'B', label: 'El novio', points: 0 },
-        { id: 'C', label: 'Fue al mismo tiempo', points: 0 },
-        { id: 'D', label: 'Nadie, lo demostraron', points: 0 }
+        { id: 'A', label: 'Paris', points: 0 },
+        { id: 'B', label: 'Roma', points: 10 },
+        { id: 'C', label: 'Argentina', points: 0 }
       ]
     }
   ];

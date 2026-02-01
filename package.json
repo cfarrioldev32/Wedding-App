@@ -22,6 +22,7 @@
     "@angular/router": "^18.2.0",
     "@primeng/themes": "^19.0.9",
     "@tailwindcss/postcss": "^4.0.8",
+    "gsap": "^3.12.5",
     "primeng": "^18.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

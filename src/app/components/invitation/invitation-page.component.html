@@ -7,6 +7,26 @@
       <div class="divider" aria-hidden="true"></div>
     </header>
 
+    <section class="hero-photo" aria-label="Foto principal">
+      <div class="hero-photo-card">
+        <div class="hero-photo-frame" *ngIf="!heroImageFailed; else heroFallback">
+          <img
+            class="hero-photo-img"
+            [src]="INVITATION_HERO_IMAGE_URL"
+            alt="Foto de novios besandose (placeholder)"
+            (error)="heroImageFailed = true"
+            loading="lazy"
+          />
+          <div class="hero-photo-overlay" aria-hidden="true"></div>
+        </div>
+        <ng-template #heroFallback>
+          <div class="hero-photo-fallback">
+            <p>Foto proximamente</p>
+          </div>
+        </ng-template>
+      </div>
+    </section>
+
     <section class="countdown" aria-label="Cuenta regresiva">
       <h2 class="section-title">Falta muy poquito</h2>
       <app-countdown [targetDate]="targetDate"></app-countdown>
@@ -15,22 +35,27 @@
     <section class="where">
       <h2 class="section-title">Donde</h2>
       <div class="where-card">
-        <p class="where-item"><strong>Ceremonia:</strong> {{ ceremonyPlace }}</p>
-        <p class="where-item"><strong>Direccion:</strong> {{ ceremonyAddress }}</p>
-        <p class="where-item"><strong>Ciudad:</strong> {{ ceremonyCity }}</p>
+        <p class="where-item">
+          La ceremonia se celebrara en {{ CEREMONY_NAME }}, en {{ CEREMONY_CITY }}.
+        </p>
+        <p class="where-item"><strong>Ceremonia:</strong> {{ CEREMONY_NAME }}</p>
+        <p class="where-item"><strong>Ciudad:</strong> {{ CEREMONY_CITY }}</p>
         <a
           mat-stroked-button
           color="primary"
           class="maps-button"
-          [attr.href]="mapUrl || null"
-          [attr.aria-disabled]="!mapUrl"
-          [attr.tabindex]="mapUrl ? 0 : -1"
-          [class.disabled]="!mapUrl"
+          [attr.href]="mapsUrl || null"
+          [attr.aria-disabled]="!mapsUrl"
+          [attr.tabindex]="mapsUrl ? 0 : -1"
+          [class.disabled]="!mapsUrl"
           target="_blank"
           rel="noopener"
         >
           Abrir en Google Maps
         </a>
+        <p class="where-helper" *ngIf="!mapsUrl">
+          Ubicacion exacta a confirmar.
+        </p>
       </div>
     </section>
 

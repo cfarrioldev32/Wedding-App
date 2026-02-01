@@ -1,48 +1,67 @@
-<div class="relative min-h-screen flex flex-col items-center justify-center bg-cover bg-center text-gray-900">
-  <header class="w-full bg-white bg-opacity-80 py-4 shadow-md text-center border-b border-yellow-600">
-    <h1 class="text-3xl font-bold" style="font-family: 'Courier New', Courier, monospace;">Bienvenidos a Nuestra Boda</h1>
-  </header>
-  <main style="display: flex; justify-content: center; flex-direction: column;" class="mapamundi items-end justify-end w-full px-4 py-8 pr-16">
-    <!-- Contenedor para la imagen en móvil -->
-    <div class="md:hidden w-full flex justify-center mb-4">
-      <img src="prueba.png" alt="Imagen de prueba" class="w-64 h-auto">
-    </div>
-    <!-- Formulario -->
-    <div class="relative bg-white p-8 shadow-xl rounded-lg w-full max-w-lg border-2 border-yellow-600" style="font-family: 'Courier New', Courier, monospace;">
-      <!-- Sello postal -->
-      <div class="absolute -top-8 -right-8">
-        <img src="sello.jpg" alt="Sello Postal" class="w-24 opacity-90 transform rotate-12">
+﻿<section class="register-page">
+  <div class="hero">
+    <div class="hero-media" [class.map-debug]="debugAnchors">
+      <div class="hero-overlay"></div>
+      <span #anchorAr class="map-anchor map-anchor--ar" aria-hidden="true"></span>
+      <span #anchorEs class="map-anchor map-anchor--es" aria-hidden="true"></span>
+      <app-travel-hero-animation
+        [durationSeconds]="6.5"
+        [anchorAr]="anchorArRef"
+        [anchorEs]="anchorEsRef"
+        [debug]="debugAnchors"
+      ></app-travel-hero-animation>
+      <div class="hero-text">
+        <p class="hero-eyebrow">Bienvenidos a nuestra boda</p>
+        <h1 class="hero-title">Cristian & Carmen</h1>
+        <p class="hero-subtitle">Argentina & Espana</p>
       </div>
-      <!-- Formulario -->
-      <form [formGroup]="registroForm" (ngSubmit)="registrar()" class="space-y-6 p-8">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Nombre</label>
-          <input type="text" formControlName="nombre" class="w-full border-0 border-b border-gray-400 rounded-none p-2 font-mono focus:ring-0 focus:border-yellow-500" />
+    </div>
+  </div>
+
+  <div class="form-shell">
+    <div class="form-card">
+      <div class="form-header">
+        <div class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="presentation">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(200, 167, 109, 0.6)" stroke-width="2" />
+            <path d="M20 34 L28 26 L36 34 L44 26" stroke="rgba(200, 167, 109, 0.7)" stroke-width="2" fill="none" />
+          </svg>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Apellido</label>
-          <input type="text" formControlName="apellido" class="w-full border-0 border-b border-gray-400 rounded-none p-2 font-mono focus:ring-0 focus:border-yellow-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" formControlName="email" class="w-full border-0 border-b border-gray-400 rounded-none p-2 font-mono focus:ring-0 focus:border-yellow-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">País de origen</label>
-          <input type="text" formControlName="pais" class="w-full border-0 border-b border-gray-400 rounded-none p-2 font-mono focus:ring-0 focus:border-yellow-500" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Número de invitados</label>
-          <input type="number" formControlName="invitados" class="w-full border-0 border-b border-gray-400 rounded-none p-2 font-mono focus:ring-0 focus:border-yellow-500" />
-        </div>
-        <button type="submit" class="w-full bg-red-600 text-white py-2 rounded shadow-md transform hover:scale-105 hover:bg-red-700 border-4 border-red-800 font-bold uppercase tracking-widest transition duration-200" style="font-family: 'Courier New', Courier, monospace;">Registrarse</button>
+        <p class="form-eyebrow">Confirmacion</p>
+        <h2 class="form-title">Nos encantaria contar con vos</h2>
+        <p class="form-subtitle">Completa tus datos para reservar tu lugar.</p>
+      </div>
+
+      <form [formGroup]="registroForm" (ngSubmit)="registrar()" class="form-grid">
+        <label class="field">
+          <span>Nombre</span>
+          <input type="text" formControlName="nombre" placeholder="Tu nombre" />
+        </label>
+
+        <label class="field">
+          <span>Apellido</span>
+          <input type="text" formControlName="apellido" placeholder="Tu apellido" />
+        </label>
+
+        <label class="field">
+          <span>Email</span>
+          <input type="email" formControlName="email" placeholder="tu@mail.com" />
+        </label>
+
+        <label class="field">
+          <span>Pais de origen</span>
+          <input type="text" formControlName="pais" placeholder="Argentina, Espana..." />
+        </label>
+
+        <label class="field">
+          <span>Numero de invitados</span>
+          <input type="number" formControlName="invitados" min="1" />
+        </label>
+
+        <button type="submit" mat-flat-button color="primary" class="primary-cta">
+          Registrarse
+        </button>
       </form>
     </div>
-  </main>
-  <footer class="w-full bg-white bg-opacity-80 py-2 text-center text-sm border-t border-yellow-600">
-    <p>&copy; 2025 Nuestra Boda - Argentina & España</p>
-  </footer>
-  <div style="transform: translate(-30%, -110%) rotate(-35deg);">
-    <img src="avion.png" alt="Avión" class="opacity-80" style="width: 600px;">
   </div>
-</div>
+</section>

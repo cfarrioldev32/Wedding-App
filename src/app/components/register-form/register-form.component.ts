@@ -1,17 +1,24 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { TravelHeroAnimationComponent } from './travel-hero-animation/travel-hero-animation.component';
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, TravelHeroAnimationComponent],
   templateUrl: './register-form.component.html',
-  styleUrl: './register-form.component.css'
+  styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent {
   registroForm: FormGroup;
   sellando: boolean = false;
   sellado: boolean = false;
+  debugAnchors = false;
+
+  @ViewChild('anchorAr', { static: true }) anchorArRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('anchorEs', { static: true }) anchorEsRef!: ElementRef<HTMLSpanElement>;
 
   constructor(private fb: FormBuilder) {
     this.registroForm = this.fb.group({

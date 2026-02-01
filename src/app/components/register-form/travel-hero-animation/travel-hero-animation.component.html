@@ -1,0 +1,25 @@
+﻿<div class="travel-hero" #container [class.debug]="debug">
+  <svg #svgEl class="route-svg" preserveAspectRatio="none" aria-hidden="true">
+    <line #routeLine class="route-line" />
+    <circle #startDot class="route-dot" r="5" />
+    <circle #endDot class="route-dot route-dot--end" r="6" />
+
+    <image
+      #planeEl
+      class="plane"
+      href="/plane.png"
+      x="0"
+      y="0"
+      width="34"
+      height="34"
+      preserveAspectRatio="xMidYMid meet"
+    />
+
+    <g #heartEl class="arrival-heart" transform="translate(0,0)">
+      <path
+        d="M16 28 C6 18, 4 12, 7 8 C10 4, 16 6, 16 10 C16 6, 22 4, 25 8 C28 12, 26 18, 16 28 Z"
+        fill="rgba(214, 49, 59, 0.95)"
+      ></path>
+    </g>
+  </svg>
+</div>
