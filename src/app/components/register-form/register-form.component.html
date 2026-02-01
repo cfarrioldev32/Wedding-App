@@ -19,49 +19,73 @@
   </div>
 
   <div class="form-shell">
-    <div class="form-card">
-      <div class="form-header">
-        <div class="stamp" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="presentation">
-            <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(200, 167, 109, 0.6)" stroke-width="2" />
-            <path d="M20 34 L28 26 L36 34 L44 26" stroke="rgba(200, 167, 109, 0.7)" stroke-width="2" fill="none" />
-          </svg>
+    <div class="passport-book">
+      <div class="passport-fold" aria-hidden="true"></div>
+
+      <section class="passport-page passport-left" aria-hidden="true">
+        <div class="passport-title-block">
+          <p class="passport-title">Pasaporte</p>
+          <p class="passport-subtitle">Registro de invitado</p>
         </div>
-        <p class="form-eyebrow">Confirmacion</p>
-        <h2 class="form-title">Nos encantaria contar con vos</h2>
-        <p class="form-subtitle">Completa tus datos para reservar tu lugar.</p>
-      </div>
 
-      <form [formGroup]="registroForm" (ngSubmit)="registrar()" class="form-grid">
-        <label class="field">
-          <span>Nombre</span>
-          <input type="text" formControlName="nombre" placeholder="Tu nombre" />
-        </label>
+        <div class="passport-photo">
+          <div class="photo-placeholder">Foto</div>
+        </div>
 
-        <label class="field">
-          <span>Apellido</span>
-          <input type="text" formControlName="apellido" placeholder="Tu apellido" />
-        </label>
+        <div class="passport-meta">
+          <p><span>Authority</span> AR-ES UNION</p>
+          <p><span>Document No.</span> WED-2026</p>
+          <p><span>Nationality</span> ARG / ESP</p>
+          <p><span>Place of issue</span> Alcala de Henares</p>
+        </div>
 
-        <label class="field">
-          <span>Email</span>
-          <input type="email" formControlName="email" placeholder="tu@mail.com" />
-        </label>
+        <div class="passport-lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
-        <label class="field">
-          <span>Pais de origen</span>
-          <input type="text" formControlName="pais" placeholder="Argentina, Espana..." />
-        </label>
+        <div class="passport-mrz">
+          P&lt;ESP&lt;&lt;CRISTIAN&lt;CARMEN&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+        </div>
+      </section>
 
-        <label class="field">
-          <span>Numero de invitados</span>
-          <input type="number" formControlName="invitados" min="1" />
-        </label>
+      <section class="passport-page passport-right">
+        <div class="form-header">
+          <div class="stamp" aria-hidden="true">
+            <img src="/sello.png" alt="" />
+          </div>
+          <p class="form-eyebrow">Confirmacion</p>
+          <h2 class="form-title">Nos encantaria contar con vos</h2>
+          <p class="form-subtitle">Completa tus datos para reservar tu lugar.</p>
+        </div>
 
-        <button type="submit" mat-flat-button color="primary" class="primary-cta">
-          Registrarse
-        </button>
-      </form>
+        <form [formGroup]="registroForm" (ngSubmit)="registrar()" class="form-grid">
+          <label class="passport-field">
+            <span>Nombre</span>
+            <input type="text" formControlName="nombre" placeholder="Tu nombre" />
+          </label>
+
+          <label class="passport-field">
+            <span>Apellido</span>
+            <input type="text" formControlName="apellido" placeholder="Tu apellido" />
+          </label>
+
+          <label class="passport-field">
+            <span>Email</span>
+            <input type="email" formControlName="email" placeholder="tu@mail.com" />
+          </label>
+
+          <label class="passport-field">
+            <span>Pais de origen</span>
+            <input type="text" formControlName="pais" placeholder="Argentina, Espana..." />
+          </label>
+
+          <button type="submit" mat-flat-button color="primary" class="primary-cta">
+            Registrarse
+          </button>
+        </form>
+      </section>
     </div>
   </div>
 </section>

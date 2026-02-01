@@ -1,100 +1,120 @@
-﻿<section class="invitation">
-  <div class="invitation-frame">
+﻿<main class="invitation-page">
+  <section class="invitation-shell">
+    <div class="shell-watermark" aria-hidden="true"></div>
+    <img class="stamp stamp-left" [src]="POSTAL_STAMP_PATH" alt="" aria-hidden="true" />
+    <img class="stamp stamp-right" [src]="POSTAL_STAMP_PATH" alt="" aria-hidden="true" />
+
     <header class="hero">
       <p class="hero-eyebrow">Nos casamos</p>
-      <h1 class="hero-title">Cristian <span class="amp">&</span> Carmen</h1>
+      <h1 class="hero-title">Cristian & Carmen</h1>
+      <div class="hero-ornament" aria-hidden="true"></div>
       <p class="hero-date">17 de octubre de 2026</p>
-      <div class="divider" aria-hidden="true"></div>
     </header>
 
-    <section class="hero-photo" aria-label="Foto principal">
-      <div class="hero-photo-card">
-        <div class="hero-photo-frame" *ngIf="!heroImageFailed; else heroFallback">
-          <img
-            class="hero-photo-img"
-            [src]="INVITATION_HERO_IMAGE_URL"
-            alt="Foto de novios besandose (placeholder)"
-            (error)="heroImageFailed = true"
-            loading="lazy"
-          />
-          <div class="hero-photo-overlay" aria-hidden="true"></div>
-        </div>
-        <ng-template #heroFallback>
-          <div class="hero-photo-fallback">
-            <p>Foto proximamente</p>
-          </div>
-        </ng-template>
-      </div>
-    </section>
-
-    <section class="countdown" aria-label="Cuenta regresiva">
-      <h2 class="section-title">Falta muy poquito</h2>
+    <section class="countdown-section" aria-label="Cuenta regresiva">
+      <h2 class="section-title script">Cuenta regresiva</h2>
       <app-countdown [targetDate]="targetDate"></app-countdown>
     </section>
 
-    <section class="where">
-      <h2 class="section-title">Donde</h2>
-      <div class="where-card">
-        <p class="where-item">
-          La ceremonia se celebrara en {{ CEREMONY_NAME }}, en {{ CEREMONY_CITY }}.
-        </p>
-        <p class="where-item"><strong>Ceremonia:</strong> {{ CEREMONY_NAME }}</p>
-        <p class="where-item"><strong>Ciudad:</strong> {{ CEREMONY_CITY }}</p>
-        <a
-          mat-stroked-button
-          color="primary"
-          class="maps-button"
-          [attr.href]="mapsUrl || null"
-          [attr.aria-disabled]="!mapsUrl"
-          [attr.tabindex]="mapsUrl ? 0 : -1"
-          [class.disabled]="!mapsUrl"
-          target="_blank"
-          rel="noopener"
-        >
-          Abrir en Google Maps
-        </a>
-        <p class="where-helper" *ngIf="!mapsUrl">
-          Ubicacion exacta a confirmar.
-        </p>
+    <section class="location-section">
+      <h2 class="section-title script">Celebracion</h2>
+      <div class="location-photo" aria-hidden="true">
+        <img src="/OLIVAR.png" alt="" />
+      </div>
+      <p class="section-text">
+        La ceremonia se celebrara en
+        <span class="location-highlight">{{ CEREMONY_NAME }}</span>,
+        en <span class="location-highlight">{{ CEREMONY_CITY }}</span>.
+      </p>
+      <p class="section-text"><strong>Direccion:</strong> {{ ceremonyAddress }}</p>
+      <a
+        class="maps-link"
+        [class.disabled]="!mapsUrl"
+        [attr.href]="mapsUrl || null"
+        [attr.tabindex]="mapsUrl ? 0 : -1"
+        [attr.aria-disabled]="!mapsUrl"
+        target="_blank"
+        rel="noopener"
+      >
+        Abrir en Google Maps
+      </a>
+      <p class="section-helper" *ngIf="!mapsUrl">Ubicacion exacta a confirmar.</p>
+    </section>
+
+    <section class="dress-section">
+      <h2 class="section-title script">Dress Code</h2>
+      <p class="section-text">{{ dressCode }}</p>
+      <p class="section-subtext">Sugerimos tonos neutros y un look elegante.</p>
+    </section>
+
+    <section class="timeline-section" aria-label="Itinerario">
+      <h2 class="section-title script">Itinerario</h2>
+      <div class="timeline">
+        <div class="timeline-line" aria-hidden="true"></div>
+        <div class="timeline-item" *ngFor="let item of itinerary; let idx = index">
+          <div class="timeline-time">{{ item.time }}</div>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <span class="timeline-label">{{ item.label }}</span>
+            <span class="timeline-icon" [ngSwitch]="item.icon" aria-hidden="true">
+              <svg *ngSwitchCase="'arrival'" viewBox="0 0 24 24">
+                <path d="M3 12 H21" stroke="currentColor" stroke-width="1.5" />
+                <path d="M8 6 L12 3 L16 6" stroke="currentColor" stroke-width="1.5" fill="none" />
+              </svg>
+              <svg *ngSwitchCase="'rings'" viewBox="0 0 24 24">
+                <circle cx="9" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none" />
+                <circle cx="15" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none" />
+              </svg>
+              <svg *ngSwitchCase="'music'" viewBox="0 0 24 24">
+                <path d="M9 18 C9 19.7 7.7 21 6 21 C4.3 21 3 19.7 3 18 C3 16.3 4.3 15 6 15 C7.7 15 9 16.3 9 18 Z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                <path d="M9 18 V6 L20 4 V16" stroke="currentColor" stroke-width="1.5" fill="none" />
+                <circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="1.5" fill="none" />
+              </svg>
+            </span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="agenda">
-      <h2 class="section-title">Agenda</h2>
-      <div class="agenda-grid">
-        <div class="agenda-card">
-          <p class="agenda-time">18:00</p>
-          <p class="agenda-text">Llegada</p>
-        </div>
-        <div class="agenda-card">
-          <p class="agenda-time">18:30</p>
-          <p class="agenda-text">Ceremonia</p>
-        </div>
-        <div class="agenda-card">
-          <p class="agenda-time">20:00</p>
-          <p class="agenda-text">Fiesta</p>
-        </div>
+    <section class="gift-section">
+      <div class="gift-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" />
+          <path d="M12 4 C13 2 15 2 16 4 C17 6 15 8 12 8 C9 8 7 6 8 4 C9 2 11 2 12 4 Z" stroke="currentColor" stroke-width="1.5" fill="none" />
+          <path d="M12 8 V20" stroke="currentColor" stroke-width="1.5" />
+          <path d="M4 12 H20" stroke="currentColor" stroke-width="1.5" />
+        </svg>
       </div>
-    </section>
-
-    <section class="details">
-      <div class="detail-card">
-        <h3>Dress code</h3>
-        <p>Elegante</p>
-      </div>
-      <div class="detail-card">
-        <h3>Confirmacion</h3>
-        <p>Gracias por confirmar tu asistencia con tiempo.</p>
+      <h2 class="section-title script">{{ giftInfo.title }}</h2>
+      <p class="section-text centered">{{ giftInfo.text }}</p>
+      <div class="gift-info">
+        <p><strong>IBAN:</strong> {{ giftInfo.iban }}</p>
+        <p><strong>Bizum:</strong> {{ giftInfo.bizum }}</p>
       </div>
     </section>
 
     <footer class="cta">
-      <button mat-flat-button color="primary" routerLink="/stepper">
-        Volver
-      </button>
-      <button mat-stroked-button color="primary">
+      <button mat-flat-button color="primary" routerLink="/stepper">Volver</button>
+      <a
+        mat-stroked-button
+        color="primary"
+        class="calendar-link"
+        [href]="googleCalendarLink"
+        target="_blank"
+        rel="noopener"
+      >
         Guardar en calendario
-      </button>
+      </a>
     </footer>
-  </div>
-</section>
+
+    <button
+      *ngIf="showMusicButton"
+      class="music-toggle"
+      type="button"
+      (click)="toggleMusic()"
+      [attr.aria-label]="isMusicPlaying ? 'Pausar musica' : 'Reproducir musica'"
+    >
+      <span aria-hidden="true">{{ isMusicPlaying ? '🔇' : '🎵' }}</span>
+    </button>
+  </section>
+</main>

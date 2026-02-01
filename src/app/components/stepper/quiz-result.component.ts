@@ -1,5 +1,5 @@
 ﻿import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { QuizAnswers, QuizQuestion, QuizScoreResult } from './quiz.models';
 
 @Component({
@@ -14,8 +14,6 @@ export class QuizResultComponent {
   @Input({ required: true }) questions!: QuizQuestion[];
   @Input({ required: true }) answers!: QuizAnswers;
   @Input() rankingText = '';
-
-  @Output() restart = new EventEmitter<void>();
 
   trackById = (_: number, item: { questionId: string }) => item.questionId;
 }

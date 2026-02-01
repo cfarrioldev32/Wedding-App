@@ -64,6 +64,14 @@ interface WishFormModel {
 export class StepperComponent implements OnDestroy {
   @ViewChild(MatStepper) private stepper?: MatStepper;
 
+  readonly stepBackgrounds = [
+    'url(/fondos/rosario.png)',
+    'url(/fondos/rosario_2.png)',
+    'url(/fondos/madrid.png)',
+    'url(/fondos/madrid_2.png)',
+    'url(/fondos/madrid.png)'
+  ];
+
   readonly questions: QuizQuestion[] = [
     // TODO: Copiar las imagenes a /public/quiz y actualizar estas rutas.
     {
@@ -209,6 +217,18 @@ export class StepperComponent implements OnDestroy {
     this.stepIndex = event.selectedIndex;
   }
 
+  goPrevious(): void {
+    if (!this.stepper) {
+      return;
+    }
+    const nextIndex = Math.max(this.stepper.selectedIndex - 1, 0);
+    this.stepper.selectedIndex = nextIndex;
+  }
+
+  get currentBackground(): string {
+    return this.stepBackgrounds[this.stepIndex] || '';
+  }
+
   onToggleMultiple({
     questionId,
     optionId,
@@ -232,6 +252,9 @@ export class StepperComponent implements OnDestroy {
   finishQuiz(): void {
     if (!this.isLastStepValid()) {
       return;
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('hasUserInteracted', 'true');
     }
 
     const answers = this.form.getRawValue() as QuizAnswers;
@@ -267,6 +290,9 @@ export class StepperComponent implements OnDestroy {
     if (this.wishForm.invalid) {
       this.wishForm.markAllAsTouched();
       return;
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('hasUserInteracted', 'true');
     }
 
     this.wishSubmitting = true;

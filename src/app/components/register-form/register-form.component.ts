@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 import { TravelHeroAnimationComponent } from './travel-hero-animation/travel-hero-animation.component';
 
 @Component({
@@ -20,19 +21,20 @@ export class RegisterFormComponent {
   @ViewChild('anchorAr', { static: true }) anchorArRef!: ElementRef<HTMLSpanElement>;
   @ViewChild('anchorEs', { static: true }) anchorEsRef!: ElementRef<HTMLSpanElement>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private readonly router: Router) {
     this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      pais: ['', Validators.required],
-      invitados: [1, [Validators.required, Validators.min(1)]]
+      pais: ['', Validators.required]
     });
   }
 
   registrar(): void {
     if (this.registroForm.valid) {
-      console.log('Registro exitoso:', this.registroForm.value);
+      this.router.navigateByUrl('/stepper').catch((error) => {
+        console.error('Navigation failed', error);
+      });
     }
   }
 }

@@ -1,0 +1,21 @@
+﻿<main class="splash" [class.is-animating]="isAnimating">
+  <div class="splash-overlay" aria-hidden="true"></div>
+
+  <button
+    class="passport"
+    type="button"
+    [disabled]="isAnimating"
+    aria-label="Abrir pasaporte y continuar al registro"
+    (click)="start()"
+    (animationend)="onAnimationEnd()"
+  >
+    <img src="/assets/splash/Pasaporte_ES.svg" alt="" aria-hidden="true" />
+    <div class="passport-text">
+      <span class="passport-hint">
+        Haz clic aqui <span class="hint-hand" aria-hidden="true">🖱️</span>
+      </span>
+    </div>
+  </button>
+
+  <div class="hint">Haz clic para continuar</div>
+</main>

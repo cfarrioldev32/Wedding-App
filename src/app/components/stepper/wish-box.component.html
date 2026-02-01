@@ -59,11 +59,8 @@
     </mat-form-field>
 
     <div class="wish-actions">
-      <button type="button" mat-stroked-button matStepperPrevious>
+      <button type="button" mat-stroked-button (click)="goBack.emit()">
         Atras
-      </button>
-      <button type="button" mat-stroked-button (click)="saveDraft.emit()">
-        Guardar borrador
       </button>
       <button type="button" mat-stroked-button (click)="clearDraft.emit()">
         Limpiar

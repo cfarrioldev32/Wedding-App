@@ -38,9 +38,9 @@ export class WishBoxComponent {
   @Input() errorMessage = '';
   @Input() maxReasonLength = 500;
 
-  @Output() saveDraft = new EventEmitter<void>();
   @Output() clearDraft = new EventEmitter<void>();
   @Output() submitWish = new EventEmitter<void>();
+  @Output() goBack = new EventEmitter<void>();
 
   get countryControl(): FormControl<string> {
     return this.form.controls.country;

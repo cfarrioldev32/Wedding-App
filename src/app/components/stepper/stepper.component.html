@@ -1,4 +1,6 @@
 ﻿<div class="quiz-shell">
+  <div class="stepper-background" [style.background-image]="currentBackground"></div>
+  <div class="stepper-overlay"></div>
   <header class="quiz-header" *ngIf="!showResult">
     <div class="step-indicator">Paso {{ stepIndex + 1 }} de {{ totalSteps }}</div>
     <mat-progress-bar
@@ -11,12 +13,12 @@
   <mat-stepper
     *ngIf="!showResult"
     [linear]="true"
+    #stepper
     (selectionChange)="onStepChange($event)"
   >
     <mat-step
       *ngFor="let question of questions; let index = index"
       [stepControl]="getControl(question.id)"
-      [editable]="false"
     >
       <ng-template matStepLabel>Pregunta {{ index + 1 }}</ng-template>
 
@@ -31,8 +33,8 @@
           type="button"
           mat-stroked-button
           color="primary"
-          matStepperPrevious
           *ngIf="index > 0"
+          (click)="goPrevious()"
         >
           Atras
         </button>
@@ -48,7 +50,7 @@
       </div>
     </mat-step>
 
-    <mat-step [stepControl]="wishForm" [editable]="false">
+    <mat-step [stepControl]="wishForm">
       <ng-template matStepLabel>La caja de los deseos</ng-template>
 
       <app-wish-box
@@ -58,7 +60,7 @@
         [successMessage]="wishSuccessMessage"
         [errorMessage]="wishErrorMessage"
         [maxReasonLength]="maxReasonLength"
-        (saveDraft)="saveWishDraft()"
+        (goBack)="goPrevious()"
         (clearDraft)="clearWishDraft()"
         (submitWish)="submitWish()"
       ></app-wish-box>
@@ -71,11 +73,10 @@
     [questions]="questions"
     [answers]="answersSnapshot"
     [rankingText]="rankingText"
-    (restart)="restartQuiz()"
   ></app-quiz-result>
 
   <app-redirect-countdown
-    *ngIf="showResult && showRedirect && autoRedirectEnabled"
+    *ngIf="showResult && autoRedirectEnabled"
     [seconds]="10"
     message="Seras redirigido a la invitacion..."
     targetRoute="/invitation"
