@@ -49,6 +49,8 @@ export class InvitationPageComponent implements OnInit {
     iban: 'ES49 1465 0100 95 1745599215',
   };
 
+  ibanCopied = false;
+
   readonly MUSIC_SRC = '/assets/music/invitation.mp3';
   readonly INTERACTION_KEY = 'hasUserInteracted';
   showMusicButton = false;
@@ -87,5 +89,50 @@ export class InvitationPageComponent implements OnInit {
     });
 
     return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  }
+
+  copyIban(): void {
+    const iban = this.giftInfo.iban;
+    if (!iban || typeof window === 'undefined') {
+      return;
+    }
+
+    const finalizeCopy = () => {
+      this.ibanCopied = true;
+      setTimeout(() => {
+        this.ibanCopied = false;
+      }, 2000);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(iban)
+        .then(() => finalizeCopy())
+        .catch(() => {
+          this.fallbackCopy(iban);
+          finalizeCopy();
+        });
+      return;
+    }
+
+    this.fallbackCopy(iban);
+    finalizeCopy();
+  }
+
+  private fallbackCopy(text: string): void {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      document.execCommand('copy');
+    } catch {
+      // ignore
+    } finally {
+      document.body.removeChild(textarea);
+    }
   }
 }

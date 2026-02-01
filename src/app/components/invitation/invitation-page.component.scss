@@ -67,7 +67,7 @@
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.35em;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   color: var(--muted);
 }
 
@@ -249,6 +249,86 @@
 .gift-info {
   margin-top: 0.6rem;
   font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.iban-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.6rem 0.8rem;
+  color: var(--ink);
+}
+
+.iban-label {
+  font-weight: 600;
+}
+
+.iban-value {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.iban-copy {
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0;
+  min-width: 0;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: 0;
+}
+
+.iban-copy:hover,
+.iban-copy:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(31, 24, 18, 0.15);
+}
+
+.copy-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.copy-sheet {
+  position: absolute;
+  width: 12px;
+  height: 14px;
+  border: 1px solid rgba(43, 42, 40, 0.55);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.copy-sheet--back {
+  top: 2px;
+  left: 2px;
+  opacity: 0.55;
+}
+
+.copy-sheet--front {
+  top: 0;
+  left: 0;
+}
+
+.iban-helper {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
   color: var(--muted);
 }
 

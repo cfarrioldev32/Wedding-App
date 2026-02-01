@@ -88,7 +88,22 @@
       <h2 class="section-title script">{{ giftInfo.title }}</h2>
       <p class="section-text centered">{{ giftInfo.text }}</p>
       <div class="gift-info">
-        <p><strong>IBAN:</strong> {{ giftInfo.iban }}</p>
+        <div class="iban-row">
+          <span class="iban-label"><strong>IBAN:</strong></span>
+          <span class="iban-value">{{ giftInfo.iban }}</span>
+          <button
+            class="iban-copy"
+            type="button"
+            (click)="copyIban()"
+            [attr.aria-label]="ibanCopied ? 'IBAN copiado' : 'Copiar IBAN'"
+          >
+            <span class="copy-icon" aria-hidden="true">
+              <span class="copy-sheet copy-sheet--back"></span>
+              <span class="copy-sheet copy-sheet--front"></span>
+            </span>
+          </button>
+        </div>
+        <p class="iban-helper" *ngIf="ibanCopied">IBAN copiado al portapapeles.</p>
       </div>
     </section>
 
