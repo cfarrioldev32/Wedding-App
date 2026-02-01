@@ -180,30 +180,28 @@
   }
 
   .passport img {
-    position: static;
-    width: 32vw;
-    height: auto;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     max-width: 100%;
-    max-height: 24vh;
-    object-fit: contain;
+    max-height: 100%;
+    object-fit: cover;
     object-position: center;
     display: block;
   }
 
   .passport {
     transform: none;
-    width: 48vw;
-    height: auto;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 24vh;
-    gap: 0.5rem;
+    display: grid;
+    place-items: center;
   }
 
   .passport-text {
-    position: static;
+    position: absolute;
+    bottom: 18%;
   }
 }
