@@ -1,0 +1,85 @@
+﻿<div class="quiz-shell">
+  <header class="quiz-header" *ngIf="!showResult">
+    <div class="step-indicator">Paso {{ stepIndex + 1 }} de {{ totalSteps }}</div>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progressPercent"
+      aria-label="Progreso del quiz"
+    ></mat-progress-bar>
+  </header>
+
+  <mat-stepper
+    *ngIf="!showResult"
+    [linear]="true"
+    (selectionChange)="onStepChange($event)"
+  >
+    <mat-step
+      *ngFor="let question of questions; let index = index"
+      [stepControl]="getControl(question.id)"
+      [editable]="false"
+    >
+      <ng-template matStepLabel>Pregunta {{ index + 1 }}</ng-template>
+
+      <app-quiz-question-step
+        [question]="question"
+        [control]="getControl(question.id)"
+        (toggleMultiple)="onToggleMultiple($event)"
+      ></app-quiz-question-step>
+
+      <div class="actions">
+        <button
+          type="button"
+          mat-stroked-button
+          color="primary"
+          matStepperPrevious
+          *ngIf="index > 0"
+        >
+          Atras
+        </button>
+        <button
+          type="button"
+          mat-flat-button
+          color="primary"
+          matStepperNext
+          [disabled]="!getControl(question.id).valid"
+        >
+          Siguiente
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="wishForm" [editable]="false">
+      <ng-template matStepLabel>La caja de los deseos</ng-template>
+
+      <app-wish-box
+        [form]="wishForm"
+        [filteredCountries$]="filteredCountries$"
+        [isSubmitting]="wishSubmitting"
+        [successMessage]="wishSuccessMessage"
+        [errorMessage]="wishErrorMessage"
+        [maxReasonLength]="maxReasonLength"
+        (saveDraft)="saveWishDraft()"
+        (clearDraft)="clearWishDraft()"
+        (submitWish)="submitWish()"
+      ></app-wish-box>
+    </mat-step>
+  </mat-stepper>
+
+  <app-quiz-result
+    *ngIf="showResult && result"
+    [result]="result"
+    [questions]="questions"
+    [answers]="answersSnapshot"
+    [rankingText]="rankingText"
+    (restart)="restartQuiz()"
+  ></app-quiz-result>
+
+  <app-redirect-countdown
+    *ngIf="showResult && showRedirect && autoRedirectEnabled"
+    [seconds]="10"
+    message="Seras redirigido a la invitacion..."
+    targetRoute="/invitation"
+    (cancelled)="onRedirectCancelled()"
+    (redirected)="onRedirected()"
+  ></app-redirect-countdown>
+</div>

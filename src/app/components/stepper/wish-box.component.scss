@@ -1,0 +1,200 @@
+:host {
+  --color-ink: #1f2937;
+  --color-muted: #6b7280;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --color-primary: #c97a7a;
+  --color-primary-soft: rgba(201, 122, 122, 0.2);
+  --color-error-soft: #d14343;
+  --color-error-shadow: rgba(209, 67, 67, 0.18);
+}
+
+.wish-card {
+  background: var(--color-surface);
+  border-radius: 20px;
+  padding: 1.6rem 1.4rem;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeRise 280ms ease;
+}
+
+.wish-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wish-eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.65rem;
+  color: var(--color-muted);
+}
+
+.wish-title {
+  margin: 0;
+  font-size: 1.7rem;
+  color: var(--color-ink);
+}
+
+.wish-subtitle {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+}
+
+.wish-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.wish-field {
+  width: 100%;
+}
+
+.required-marker {
+  color: var(--color-error-soft);
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-left: 0.15rem;
+}
+
+.wish-alert {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.wish-alert.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.wish-alert.error {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.wish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.wish-actions button {
+  flex: 1 1 150px;
+  border-radius: 999px;
+}
+
+.submit-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+:host ::ng-deep .wish-field .mat-mdc-form-field-flex {
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+:host ::ng-deep .wish-field .mdc-line-ripple {
+  display: none;
+}
+
+:host ::ng-deep .wish-field .mdc-notched-outline {
+  display: none;
+}
+
+:host ::ng-deep .wish-field .mat-mdc-text-field-wrapper {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+:host ::ng-deep .wish-field .mdc-notched-outline__leading,
+:host ::ng-deep .wish-field .mdc-notched-outline__notch,
+:host ::ng-deep .wish-field .mdc-notched-outline__trailing {
+  border-color: var(--color-border);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+:host ::ng-deep .wish-field .mat-mdc-form-field-infix {
+  padding: 0.9rem 0.1rem 0.7rem;
+}
+
+:host ::ng-deep .wish-field .mat-mdc-input-element,
+:host ::ng-deep .wish-field .mat-mdc-form-field-textarea-control {
+  color: var(--color-ink);
+  font-size: 1rem;
+}
+
+:host ::ng-deep .wish-field textarea.mat-mdc-input-element {
+  min-height: 140px;
+  resize: vertical;
+}
+
+:host ::ng-deep .wish-field.mat-focused .mdc-notched-outline__leading,
+:host ::ng-deep .wish-field.mat-focused .mdc-notched-outline__notch,
+:host ::ng-deep .wish-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+:host ::ng-deep .wish-field.mat-focused .mat-mdc-text-field-wrapper {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+:host ::ng-deep .wish-field.mat-mdc-form-field-invalid .mat-mdc-text-field-wrapper {
+  border-color: var(--color-error-soft);
+  box-shadow: 0 0 0 2px var(--color-error-shadow);
+}
+
+:host ::ng-deep .wish-field .mat-mdc-form-field-error {
+  color: var(--color-error-soft);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+:host ::ng-deep .wish-field .mat-mdc-form-field-hint {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+:host ::ng-deep .wish-field .mdc-text-field__input:focus-visible {
+  outline: 2px solid transparent;
+}
+
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .wish-card {
+    padding: 2.2rem 2.6rem;
+  }
+
+  .wish-title {
+    font-size: 2.1rem;
+  }
+
+  .wish-actions {
+    justify-content: flex-end;
+  }
+
+  .wish-actions button {
+    flex: 0 0 auto;
+  }
+}

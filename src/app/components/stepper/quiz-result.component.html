@@ -1,0 +1,36 @@
+﻿<section class="result-card" aria-live="polite">
+  <header class="result-header">
+    <p class="result-eyebrow">Resultado final</p>
+    <h2 class="result-title">{{ rankingText }}</h2>
+  </header>
+
+  <div class="result-metrics">
+    <div class="metric">
+      <span class="metric-label">Puntaje total</span>
+      <span class="metric-value">{{ result.total }} / {{ result.max }}</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">Porcentaje</span>
+      <span class="metric-value">{{ result.percent | number: '1.0-0' }}%</span>
+    </div>
+  </div>
+
+  <div class="result-breakdown">
+    <h3 class="breakdown-title">Tus respuestas</h3>
+    <div class="breakdown-item" *ngFor="let item of result.breakdown; trackBy: trackById">
+      <div class="breakdown-text">
+        <p class="breakdown-question">{{ item.questionText }}</p>
+        <p class="breakdown-answers">
+          {{ item.selectedLabels.length ? item.selectedLabels.join(', ') : 'Sin respuesta' }}
+        </p>
+      </div>
+      <div class="breakdown-score">
+        {{ item.points }} / {{ item.maxPoints }}
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="restart-button" (click)="restart.emit()">
+    Reiniciar quiz
+  </button>
+</section>

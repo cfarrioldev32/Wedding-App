@@ -1,0 +1,41 @@
+﻿<section class="question-card" [attr.aria-labelledby]="question.id + '-title'">
+  <div class="question-header">
+    <h2 class="question-title" [id]="question.id + '-title'">{{ question.text }}</h2>
+    <p class="question-subtitle" *ngIf="question.allowMultiple">
+      Podes elegir mas de una opcion.
+    </p>
+  </div>
+
+  <img
+    *ngIf="question.imageUrl"
+    class="question-image"
+    [src]="question.imageUrl"
+    [alt]="question.imageAlt || question.text"
+    loading="lazy"
+  />
+
+  <div class="options" *ngIf="!question.allowMultiple; else multiOptions">
+    <mat-radio-group class="option-group" [formControl]="control" aria-label="Opciones">
+      <mat-radio-button
+        class="option-card"
+        *ngFor="let option of question.options"
+        [value]="option.id"
+      >
+        <span class="option-label">{{ option.label }}</span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <ng-template #multiOptions>
+    <div class="option-group" role="group" aria-label="Opciones">
+      <mat-checkbox
+        class="option-card"
+        *ngFor="let option of question.options"
+        [checked]="isSelected(option.id)"
+        (change)="onToggle(option.id, $event)"
+      >
+        <span class="option-label">{{ option.label }}</span>
+      </mat-checkbox>
+    </div>
+  </ng-template>
+</section>

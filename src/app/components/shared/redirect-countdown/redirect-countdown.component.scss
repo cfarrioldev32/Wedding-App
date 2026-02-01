@@ -1,0 +1,74 @@
+﻿:host {
+  --redirect-ink: #1f2937;
+  --redirect-muted: #6b7280;
+  --redirect-border: rgba(203, 167, 114, 0.4);
+  --redirect-bg: rgba(255, 248, 237, 0.85);
+}
+
+.redirect-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  background: var(--redirect-bg);
+  border: 1px solid var(--redirect-border);
+  border-radius: 18px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  animation: fadeIn 220ms ease;
+}
+
+.redirect-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.redirect-message {
+  margin: 0;
+  font-weight: 600;
+  color: var(--redirect-ink);
+}
+
+.redirect-count {
+  margin: 0;
+  color: var(--redirect-muted);
+  font-size: 0.9rem;
+}
+
+.redirect-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.redirect-actions button {
+  flex: 1 1 140px;
+  border-radius: 999px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .redirect-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .redirect-actions {
+    justify-content: flex-end;
+  }
+
+  .redirect-actions button {
+    flex: 0 0 auto;
+  }
+}

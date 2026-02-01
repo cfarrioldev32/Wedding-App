@@ -1,0 +1,66 @@
+﻿:host {
+  display: block;
+  min-height: 100vh;
+  padding: 1.5rem 1rem 3rem;
+  background: radial-gradient(circle at top, #fef3c7 0%, #f8fafc 45%, #e2e8f0 100%);
+}
+
+.quiz-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.quiz-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.step-indicator {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 1.05rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+  display: none;
+}
+
+:host ::ng-deep .mat-stepper-horizontal {
+  background: transparent;
+}
+
+:host ::ng-deep .mat-horizontal-content-container {
+  padding: 0;
+}
+
+:host ::ng-deep .mat-mdc-progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  :host {
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .quiz-shell {
+    gap: 2rem;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+}

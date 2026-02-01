@@ -1,0 +1,80 @@
+﻿<section class="wish-card" aria-live="polite">
+  <header class="wish-header">
+    <p class="wish-eyebrow">La caja de los deseos</p>
+    <h2 class="wish-title">Contanos tu proximo destino soñado</h2>
+    <p class="wish-subtitle">
+      Decinos a que pais te gustaria viajar y por que. Nos encanta leer sus ideas.
+    </p>
+  </header>
+
+  <div class="wish-alert success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="wish-alert error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <form class="wish-form" [formGroup]="form" (ngSubmit)="submitWish.emit()">
+    <mat-form-field appearance="outline" class="wish-field" floatLabel="always">
+    <mat-label>Pais <span class="required-marker">*</span></mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="country"
+        [matAutocomplete]="auto"
+        autocomplete="off"
+        aria-describedby="country-error"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let country of filteredCountries$ | async" [value]="country">
+          {{ country }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-hint>Escribi para buscar.</mat-hint>
+      <mat-error id="country-error" *ngIf="countryControl.touched && countryControl.invalid">
+        <span *ngIf="countryControl.hasError('required')">
+          El pais es obligatorio.
+        </span>
+        <span *ngIf="countryControl.hasError('minlength')">
+          Escribi al menos 2 caracteres.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="wish-field" floatLabel="always">
+      <mat-label>Por que ese destino? <span class="required-marker">*</span></mat-label>
+      <textarea
+        matInput
+        rows="5"
+        formControlName="reason"
+        maxlength="500"
+        aria-describedby="reason-error reason-count"
+      ></textarea>
+      <mat-hint id="reason-count">{{ reasonCount }} / {{ maxReasonLength }}</mat-hint>
+      <mat-error id="reason-error" *ngIf="reasonControl.touched && reasonControl.invalid">
+        <span *ngIf="reasonControl.hasError('required')">Este campo es obligatorio.</span>
+        <span *ngIf="reasonControl.hasError('minlength')">
+          Contanos un poco mas (minimo 20 caracteres).
+        </span>
+        <span *ngIf="reasonControl.hasError('maxlength')">
+          Maximo 500 caracteres.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="wish-actions">
+      <button type="button" mat-stroked-button matStepperPrevious>
+        Atras
+      </button>
+      <button type="button" mat-stroked-button (click)="saveDraft.emit()">
+        Guardar borrador
+      </button>
+      <button type="button" mat-stroked-button (click)="clearDraft.emit()">
+        Limpiar
+      </button>
+      <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid || isSubmitting">
+        <span *ngIf="!isSubmitting">Enviar deseo</span>
+        <span class="submit-loading" *ngIf="isSubmitting">
+          <mat-progress-spinner diameter="18" mode="indeterminate"></mat-progress-spinner>
+          Enviando...
+        </span>
+      </button>
+    </div>
+  </form>
+</section>

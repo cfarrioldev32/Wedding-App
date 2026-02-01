@@ -1,0 +1,22 @@
+﻿<div class="countdown-shell" *ngIf="!isComplete; else complete">
+  <div class="countdown-card">
+    <span class="count-value">{{ parts.days }}</span>
+    <span class="count-label">Dias</span>
+  </div>
+  <div class="countdown-card">
+    <span class="count-value">{{ parts.hours }}</span>
+    <span class="count-label">Horas</span>
+  </div>
+  <div class="countdown-card">
+    <span class="count-value">{{ parts.minutes }}</span>
+    <span class="count-label">Min</span>
+  </div>
+  <div class="countdown-card">
+    <span class="count-value">{{ parts.seconds }}</span>
+    <span class="count-label">Seg</span>
+  </div>
+</div>
+
+<ng-template #complete>
+  <p class="countdown-complete">¡Es hoy!</p>
+</ng-template>

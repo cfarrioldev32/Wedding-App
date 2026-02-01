@@ -1,9 +1,9 @@
 @media (min-width: 768px) {
     .mapamundi {
-        background-image: url('../../../wedding-app/public/mapa-vintage.jpg');
+        background-image: url('../../../../public/mapa-vintage.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        width: 100% ;
-    }
+        width: 100%;
+      }
 }

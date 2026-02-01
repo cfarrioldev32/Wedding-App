@@ -1,0 +1,119 @@
+﻿.result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.4);
+}
+
+.result-eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: rgba(248, 250, 252, 0.7);
+}
+
+.result-title {
+  margin: 0.4rem 0 0;
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+.result-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.metric {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: rgba(248, 250, 252, 0.7);
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.result-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.breakdown-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgba(148, 163, 184, 0.16);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+}
+
+.breakdown-question {
+  margin: 0;
+  font-weight: 600;
+}
+
+.breakdown-answers {
+  margin: 0.3rem 0 0;
+  color: rgba(248, 250, 252, 0.75);
+  font-size: 0.95rem;
+}
+
+.breakdown-score {
+  font-weight: 700;
+  min-width: 72px;
+  text-align: right;
+}
+
+.restart-button {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background: #fbbf24;
+  color: #111827;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.restart-button:focus-visible {
+  outline: 3px solid rgba(251, 191, 36, 0.4);
+  outline-offset: 2px;
+}
+
+.restart-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(251, 191, 36, 0.4);
+}
+
+@media (min-width: 768px) {
+  .result-card {
+    padding: 2.5rem 3rem;
+  }
+
+  .result-title {
+    font-size: 2rem;
+  }
+}

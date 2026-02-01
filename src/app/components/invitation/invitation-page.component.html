@@ -1,0 +1,75 @@
+﻿<section class="invitation">
+  <div class="invitation-frame">
+    <header class="hero">
+      <p class="hero-eyebrow">Nos casamos</p>
+      <h1 class="hero-title">Cristian <span class="amp">&</span> Carmen</h1>
+      <p class="hero-date">17 de octubre de 2026</p>
+      <div class="divider" aria-hidden="true"></div>
+    </header>
+
+    <section class="countdown" aria-label="Cuenta regresiva">
+      <h2 class="section-title">Falta muy poquito</h2>
+      <app-countdown [targetDate]="targetDate"></app-countdown>
+    </section>
+
+    <section class="where">
+      <h2 class="section-title">Donde</h2>
+      <div class="where-card">
+        <p class="where-item"><strong>Ceremonia:</strong> {{ ceremonyPlace }}</p>
+        <p class="where-item"><strong>Direccion:</strong> {{ ceremonyAddress }}</p>
+        <p class="where-item"><strong>Ciudad:</strong> {{ ceremonyCity }}</p>
+        <a
+          mat-stroked-button
+          color="primary"
+          class="maps-button"
+          [attr.href]="mapUrl || null"
+          [attr.aria-disabled]="!mapUrl"
+          [attr.tabindex]="mapUrl ? 0 : -1"
+          [class.disabled]="!mapUrl"
+          target="_blank"
+          rel="noopener"
+        >
+          Abrir en Google Maps
+        </a>
+      </div>
+    </section>
+
+    <section class="agenda">
+      <h2 class="section-title">Agenda</h2>
+      <div class="agenda-grid">
+        <div class="agenda-card">
+          <p class="agenda-time">18:00</p>
+          <p class="agenda-text">Llegada</p>
+        </div>
+        <div class="agenda-card">
+          <p class="agenda-time">18:30</p>
+          <p class="agenda-text">Ceremonia</p>
+        </div>
+        <div class="agenda-card">
+          <p class="agenda-time">20:00</p>
+          <p class="agenda-text">Fiesta</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="details">
+      <div class="detail-card">
+        <h3>Dress code</h3>
+        <p>Elegante</p>
+      </div>
+      <div class="detail-card">
+        <h3>Confirmacion</h3>
+        <p>Gracias por confirmar tu asistencia con tiempo.</p>
+      </div>
+    </section>
+
+    <footer class="cta">
+      <button mat-flat-button color="primary" routerLink="/stepper">
+        Volver
+      </button>
+      <button mat-stroked-button color="primary">
+        Guardar en calendario
+      </button>
+    </footer>
+  </div>
+</section>
