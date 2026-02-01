@@ -1,20 +1,20 @@
-﻿import { Injectable } from '@angular/core';
-import { WishPayload } from './wish.models';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
+import { WishPayload } from '../../components/stepper/wish.models';
+import { WishRepository } from './wish-repository';
 
 const WISHES_KEY = 'wedding_wishes';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WishService {
-  submitWish(payload: WishPayload): Promise<WishPayload> {
-    // TODO: Reemplazar con llamado real al backend cuando exista.
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        this.saveWishLocal(payload);
-        resolve(payload);
-      }, 800);
-    });
+export class LocalStorageWishRepository implements WishRepository {
+  saveWish(payload: WishPayload): Observable<WishPayload> {
+    return of(payload).pipe(
+      delay(800),
+      tap(() => this.saveWishLocal(payload))
+    );
   }
 
   private saveWishLocal(payload: WishPayload): void {
@@ -37,7 +37,7 @@ export class WishService {
         localStorage.setItem(WISHES_KEY, JSON.stringify(existing));
       }
     } catch {
-      // Swallow storage errors silently for now.
+      // Ignore storage errors.
     }
   }
 

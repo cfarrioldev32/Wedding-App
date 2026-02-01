@@ -86,6 +86,31 @@
   text-align: right;
 }
 
+.result-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.result-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 14px 24px rgba(15, 23, 42, 0.25);
+}
+
+.result-cta:hover,
+.result-cta:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.3);
+}
+
 @media (min-width: 768px) {
   .result-card {
     padding: 2.5rem 3rem;

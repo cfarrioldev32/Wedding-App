@@ -20,7 +20,7 @@ export class InvitationPageComponent implements OnInit {
   readonly CEREMONY_CITY = 'Alcalá de Henares, Madrid';
   readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalá de Henares, Madrid'; // TODO: completar direccion exacta.
 
-  readonly GOOGLE_MAPS_URL = ''; // TODO: pegar link exacto de Google Maps.
+  readonly GOOGLE_MAPS_URL = 'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=Kcc9HdaHSUINMVWNKrJE-Z1y&daddr=Cam.+el+Olivar,+9,+28806+Alcal%C3%A1+de+Henares,+Madrid'; // TODO: pegar link exacto de Google Maps.
 
   // TODO: Ejemplo de URL valida: https://www.google.com/maps/place/El+Olivar/@... (usar el link exacto).
   buildGoogleMapsSearchUrl(): string {
@@ -46,8 +46,7 @@ export class InvitationPageComponent implements OnInit {
   readonly giftInfo = {
     title: 'Regalo',
     text: 'Tu presencia es lo mas importante. Si deseas colaborar, aqui va la info:',
-    iban: '<IBAN>',
-    bizum: '<BIZUM>'
+    iban: 'ES49 1465 0100 95 1745599215',
   };
 
   readonly MUSIC_SRC = '/assets/music/invitation.mp3';

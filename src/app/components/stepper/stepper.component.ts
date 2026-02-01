@@ -27,7 +27,10 @@ import { QuizResultComponent } from './quiz-result.component';
 import { COUNTRIES } from './countries';
 import { WishBoxComponent } from './wish-box.component';
 import { WishDraft, WishPayload } from './wish.models';
-import { WishService } from './wish.service';
+import { finalize } from 'rxjs';
+import { WishServiceFacade } from '../../services/wish/wish-service.facade';
+import { QuizServiceFacade } from '../../services/quiz/quiz-service.facade';
+import { getGuestEmail } from '../../services/session/session-storage';
 import { RedirectCountdownComponent } from '../shared/redirect-countdown/redirect-countdown.component';
 
 interface StoredQuizPayload {
@@ -142,7 +145,8 @@ export class StepperComponent implements OnDestroy {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly wishService: WishService
+    private readonly wishService: WishServiceFacade,
+    private readonly quizService: QuizServiceFacade
   ) {
     this.form = this.formBuilder.group({}) as FormGroup<
       Record<string, FormControl<QuizAnswerValue>>
@@ -271,6 +275,29 @@ export class StepperComponent implements OnDestroy {
       answers,
       result
     });
+
+    const email = getGuestEmail();
+    if (email) {
+      this.quizService
+        .submitResult({
+          email,
+          score: result.total,
+          percent: result.percent,
+          breakdown: result.breakdown.reduce<Record<string, unknown>>((acc, item) => {
+            acc[item.questionId] = {
+              points: item.points,
+              maxPoints: item.maxPoints,
+              selectedLabels: item.selectedLabels
+            };
+            return acc;
+          }, {})
+        })
+        .subscribe({
+          error: (error) => {
+            console.error('Error enviando quiz', error);
+          }
+        });
+    }
   }
 
   saveWishDraft(): void {
@@ -289,6 +316,12 @@ export class StepperComponent implements OnDestroy {
   submitWish(): void {
     if (this.wishForm.invalid) {
       this.wishForm.markAllAsTouched();
+      return;
+    }
+    const email = getGuestEmail();
+    if (!email) {
+      this.wishErrorMessage =
+        'Necesitamos tu correo para guardar el deseo. Volve a registrarte.';
       return;
     }
     if (typeof window !== 'undefined') {
@@ -311,18 +344,25 @@ export class StepperComponent implements OnDestroy {
 
     this.wishService
       .submitWish(payload)
-      .then(() => {
-        this.wishSuccessMessage = 'Deseo enviado. Gracias por compartirlo.';
-        this.clearWishDraftStorage();
-        setTimeout(() => this.finishQuiz(), 600);
-      })
-      .catch((error) => {
-        console.error('Error enviando deseo', error);
-        this.wishErrorMessage =
-          'No pudimos enviar el deseo. Probemos de nuevo en un momento.';
-      })
-      .finally(() => {
-        this.wishSubmitting = false;
+      .pipe(
+        finalize(() => {
+          this.wishSubmitting = false;
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.wishSuccessMessage =
+            this.wishService.getLastSaveMode() === 'local-fallback'
+              ? 'Guardado localmente. Se sincronizara cuando haya conexion.'
+              : 'Deseo enviado. Gracias por compartirlo.';
+          this.clearWishDraftStorage();
+          setTimeout(() => this.finishQuiz(), 600);
+        },
+        error: (error) => {
+          console.error('Error enviando deseo', error);
+          this.wishErrorMessage =
+            'No pudimos enviar el deseo. Probemos de nuevo en un momento.';
+        }
       });
   }
 

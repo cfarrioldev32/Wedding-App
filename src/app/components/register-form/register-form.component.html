@@ -19,10 +19,17 @@
   </div>
 
   <div class="form-shell">
-    <div class="passport-book">
+    <div class="passport-scene" [class.is-opening]="isOpening">
+      <div class="passport-book" [class.is-stamping]="isStamping">
+      <div class="stamp-overlay" aria-hidden="true">
+        <div class="stamp-tool">
+          <img src="/sello.png" alt="" />
+        </div>
+        <div class="stamp-imprint">QUE COMIENCE EL VIAJE</div>
+      </div>
       <div class="passport-fold" aria-hidden="true"></div>
 
-      <section class="passport-page passport-left" aria-hidden="true">
+      <section class="passport-page passport-left passport-cover" aria-hidden="true">
         <div class="passport-title-block">
           <p class="passport-title">Pasaporte</p>
           <p class="passport-subtitle">Registro de invitado</p>
@@ -60,7 +67,26 @@
           <p class="form-subtitle">Completa tus datos para reservar tu lugar.</p>
         </div>
 
-        <form [formGroup]="registroForm" (ngSubmit)="registrar()" class="form-grid">
+        <div class="existing-session" *ngIf="hasExistingSession">
+          <p class="existing-title">Ya completaste el formulario.</p>
+          <p class="existing-text">Correo: <strong>{{ existingSessionEmail }}</strong></p>
+          <p class="existing-text" *ngIf="existingScoreText">
+            Puntaje: <strong>{{ existingScoreText }}</strong>
+          </p>
+          <p class="existing-text" *ngIf="existingRankingText">
+            Resultado: <strong>{{ existingRankingText }}</strong>
+          </p>
+          <a mat-stroked-button color="primary" routerLink="/invitation" class="primary-cta">
+            Ir a la invitacion
+          </a>
+        </div>
+
+        <form
+          *ngIf="!hasExistingSession"
+          [formGroup]="registroForm"
+          (ngSubmit)="registrar()"
+          class="form-grid"
+        >
           <label class="passport-field">
             <span>Nombre</span>
             <input type="text" formControlName="nombre" placeholder="Tu nombre" />
@@ -81,11 +107,18 @@
             <input type="text" formControlName="pais" placeholder="Argentina, Espana..." />
           </label>
 
-          <button type="submit" mat-flat-button color="primary" class="primary-cta">
+          <button
+            type="submit"
+            mat-flat-button
+            color="primary"
+            class="primary-cta"
+            [disabled]="isStamping"
+          >
             Registrarse
           </button>
         </form>
       </section>
+      </div>
     </div>
   </div>
 </section>

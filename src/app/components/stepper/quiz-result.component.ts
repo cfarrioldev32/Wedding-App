@@ -1,11 +1,12 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { QuizAnswers, QuizQuestion, QuizScoreResult } from './quiz.models';
 
 @Component({
   selector: 'app-quiz-result',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './quiz-result.component.html',
   styleUrl: './quiz-result.component.css'
 })
