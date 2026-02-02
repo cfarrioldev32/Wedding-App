@@ -18,7 +18,7 @@ export class InvitationPageComponent implements OnInit {
 
   readonly CEREMONY_NAME = 'El Olivar';
   readonly CEREMONY_CITY = 'Alcalá de Henares, Madrid';
-  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalá de Henares, Madrid'; // TODO: completar direccion exacta.
+  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalá de Henares, Madrid'; // TODO: completar dirección exacta.
 
   readonly GOOGLE_MAPS_URL = 'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=Kcc9HdaHSUINMVWNKrJE-Z1y&daddr=Cam.+el+Olivar,+9,+28806+Alcal%C3%A1+de+Henares,+Madrid'; // TODO: pegar link exacto de Google Maps.
 
@@ -45,7 +45,7 @@ export class InvitationPageComponent implements OnInit {
 
   readonly giftInfo = {
     title: 'Regalo',
-    text: 'Tu presencia es lo mas importante. Si deseas colaborar, aqui va la info:',
+    text: 'Tu presencia es lo más importante. Si deseas colaborar, aquí va la info:',
     iban: 'ES49 1465 0100 95 1745599215',
   };
 
@@ -76,7 +76,7 @@ export class InvitationPageComponent implements OnInit {
   get googleCalendarLink(): string {
     const title = 'Boda Cristian & Carmen';
     const location = `${this.CEREMONY_NAME}, ${this.CEREMONY_CITY}`;
-    const details = 'Ceremonia y celebracion';
+    const details = 'Ceremonia y celebración';
     const start = '20261017T180000';
     const end = '20261017T230000';
 
