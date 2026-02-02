@@ -117,8 +117,8 @@ export class StepperComponent implements OnDestroy {
       imageAlt: 'Foto en Roma',
       options: [
         { id: 'A', label: 'Paris', points: 0 },
-        { id: 'B', label: 'Roma', points: 10 },
-        { id: 'C', label: 'Argentina', points: 0 }
+        { id: 'B', label: 'Roma', points: 0 },
+        { id: 'C', label: 'Argentina', points: 10 }
       ]
     }
   ];
