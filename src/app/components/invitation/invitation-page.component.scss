@@ -96,11 +96,13 @@
   margin: 0 0 0.8rem;
   font-size: 1.35rem;
   color: var(--ink);
+  text-align: center;
 }
 
 .section-title.script {
   font-family: 'Brush Script MT', 'Times New Roman', serif;
   font-size: 1.8rem;
+  text-align: center;
 }
 
 .section-text {
@@ -387,5 +389,12 @@
 @media (prefers-reduced-motion: reduce) {
   .invitation-shell {
     animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .iban-value {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
   }
 }
