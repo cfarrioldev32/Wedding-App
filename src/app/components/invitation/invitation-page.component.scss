@@ -507,6 +507,29 @@
     font-size: 0.82rem;
     letter-spacing: 0.06em;
   }
+
+  .iban-row {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "label button"
+      "value value";
+    align-items: start;
+  }
+
+  .iban-label {
+    grid-area: label;
+  }
+
+  .iban-value {
+    grid-area: value;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .iban-copy {
+    grid-area: button;
+    justify-self: end;
+  }
 }
 
 .calendar-link.primary {
