@@ -82,35 +82,7 @@
         <span class="section-icon" aria-hidden="true">🕘</span>
         Itinerario
       </h2>
-      <div class="timeline">
-        <div class="timeline-line" aria-hidden="true"></div>
-        <div class="timeline-item" *ngFor="let item of itinerary; let idx = index">
-          <div class="timeline-time">{{ item.time }}</div>
-          <div class="timeline-center" aria-hidden="true">
-            <span class="timeline-dot"></span>
-          </div>
-          <div class="timeline-content">
-            <span class="timeline-label" [class.script]="item.label === 'Ceremonia' || item.label === 'Fiesta'">
-              {{ item.label }}
-            </span>
-          </div>
-          <span class="timeline-icon" [ngSwitch]="item.icon" aria-hidden="true">
-            <svg *ngSwitchCase="'arrival'" viewBox="0 0 24 24">
-              <path d="M3 12 H21" stroke="currentColor" stroke-width="1.5" />
-              <path d="M8 6 L12 3 L16 6" stroke="currentColor" stroke-width="1.5" fill="none" />
-            </svg>
-            <svg *ngSwitchCase="'rings'" viewBox="0 0 24 24">
-              <circle cx="9" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none" />
-              <circle cx="15" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none" />
-            </svg>
-            <svg *ngSwitchCase="'music'" viewBox="0 0 24 24">
-              <path d="M9 18 C9 19.7 7.7 21 6 21 C4.3 21 3 19.7 3 18 C3 16.3 4.3 15 6 15 C7.7 15 9 16.3 9 18 Z" stroke="currentColor" stroke-width="1.5" fill="none" />
-              <path d="M9 18 V6 L20 4 V16" stroke="currentColor" stroke-width="1.5" fill="none" />
-              <circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="1.5" fill="none" />
-            </svg>
-          </span>
-        </div>
-      </div>
+      <img class="timeline-image" src="/itinerario.png" alt="Itinerario del evento" />
     </section>
 
     <section class="gift-section" revealOnScroll>
