@@ -46,7 +46,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
 
   readonly giftInfo = {
     title: 'Regalo',
-    text: 'Tu presencia es lo m�s importante. Si deseas colaborar, aqu� va la info:',
+    text: 'Tu presencia es lo más importante. Si deseas colaborar, aquí va la info:',
     iban: 'ES49 1465 0100 95 1745599215',
   };
 
