@@ -19,7 +19,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
 
   readonly CEREMONY_NAME = 'El Olivar';
   readonly CEREMONY_CITY = 'Alcalá de Henares, Madrid';
-  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalá de Henares, Madrid'; // TODO: completar direcci�n exacta.
+  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalá de Henares, Madrid'; // TODO: completar dirección exacta.
 
   readonly GOOGLE_MAPS_URL = 'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=Kcc9HdaHSUINMVWNKrJE-Z1y&daddr=Cam.+el+Olivar,+9,+28806+Alcal%C3%A1+de+Henares,+Madrid'; // TODO: pegar link exacto de Google Maps.
 
@@ -74,17 +74,24 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnInit(): void {
     this.musicService.init(this.MUSIC_SRC, 0.3);
     this.showMusicButton = true;
+    const tryPlay = () => {
+      void this.musicService.play();
+    };
     void this.musicService.play().catch(() => {
       // Some browsers block autoplay; retry on first user interaction.
       const resume = () => {
         this.documentRef.removeEventListener('pointerdown', resume);
         this.documentRef.removeEventListener('touchstart', resume);
         this.documentRef.removeEventListener('keydown', resume);
-        void this.musicService.play();
+        this.documentRef.removeEventListener('scroll', resume);
+        this.documentRef.removeEventListener('wheel', resume);
+        tryPlay();
       };
       this.documentRef.addEventListener('pointerdown', resume, { once: true });
       this.documentRef.addEventListener('touchstart', resume, { once: true });
       this.documentRef.addEventListener('keydown', resume, { once: true });
+      this.documentRef.addEventListener('scroll', resume, { once: true, passive: true });
+      this.documentRef.addEventListener('wheel', resume, { once: true, passive: true });
     });
   }
   ngAfterViewInit(): void {
