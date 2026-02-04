@@ -32,7 +32,7 @@ export class InvitationPageComponent implements OnInit {
     return this.GOOGLE_MAPS_URL || '';
   }
 
-  readonly MAP_WATERMARK_PATH = '/assets/invitation/map-watermark.svg';
+  readonly MAP_WATERMARK_PATH = '/assets/images/mapa-vintage.jpg';
   readonly POSTAL_STAMP_PATH = '/assets/invitation/postal-stamp.svg';
 
   readonly dressCode = 'Formal';

@@ -1,12 +1,23 @@
 ﻿:host {
   --bg: #f8f2e8;
-  --paper: rgba(255, 255, 255, 0.88);
+  --paper: rgba(255, 255, 255, 0.76);
   --ink: #2b2a28;
   --muted: #6f6b66;
   --accent: #c77b7b;
   --line: rgba(199, 123, 123, 0.4);
-  --mapOpacity: 0.12;
+  --mapOpacity: 0.14;
+  --mapOverlayOpacity: 0;
+  --mapOverlayGradient: linear-gradient(180deg, rgba(255, 251, 244, 0.7), rgba(255, 251, 244, 0.92));
+  --mapTileWidth: 800px;
   --radius: 16px;
+  --title-font-family: 'Brush Script MT', 'Times New Roman', serif;
+  --title-font-weight: 400;
+  --title-letter-spacing: 0;
+  --title-line-height: normal;
+  --hero-title-size-desktop: 2.5rem;
+  --hero-title-size-mobile: 2.5rem;
+  --section-title-size-desktop: 1.8rem;
+  --section-title-size-mobile: 1.8rem;
 }
 
 .invitation-page {
@@ -24,20 +35,49 @@
   border-radius: 24px;
   padding: 2.4rem 1.5rem 3rem;
   position: relative;
+  isolation: isolate;
   box-shadow: 0 24px 60px rgba(32, 24, 18, 0.12);
   border: 1px solid rgba(199, 123, 123, 0.2);
   overflow: hidden;
 }
 
-.shell-watermark {
+.invitation-shell::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/assets/invitation/map-watermark.svg');
-  background-repeat: no-repeat;
-  background-position: center 18%;
-  background-size: 120%;
+  background-image: url('/assets/images/mapa-vintage.jpg');
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: var(--mapTileWidth) auto;
   opacity: var(--mapOpacity);
+  filter: saturate(0.95) contrast(0.95);
   pointer-events: none;
+  z-index: 0;
+  animation: mapScroll 45s linear infinite;
+}
+
+.invitation-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--mapOverlayGradient);
+  opacity: var(--mapOverlayOpacity);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.invitation-content {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes mapScroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: calc(var(--mapTileWidth) * -1) 0;
+  }
 }
 
 .stamp {
@@ -45,6 +85,7 @@
   width: 80px;
   opacity: 0.28;
   pointer-events: none;
+  z-index: 1;
 }
 
 .stamp-left {
@@ -75,8 +116,11 @@
 
 .hero-title {
   margin: 0.8rem 0 0.5rem;
-  font-size: 2.5rem;
-  font-family: 'Brush Script MT', 'Times New Roman', serif;
+  font-size: var(--hero-title-size-desktop);
+  font-family: var(--title-font-family);
+  font-weight: var(--title-font-weight);
+  letter-spacing: var(--title-letter-spacing);
+  line-height: var(--title-line-height);
   color: var(--ink);
 }
 
@@ -126,8 +170,11 @@
 }
 
 .section-title.script {
-  font-family: 'Brush Script MT', 'Times New Roman', serif;
-  font-size: 1.8rem;
+  font-family: var(--title-font-family);
+  font-weight: var(--title-font-weight);
+  letter-spacing: var(--title-letter-spacing);
+  line-height: var(--title-line-height);
+  font-size: var(--section-title-size-desktop);
   text-align: center;
 }
 
@@ -493,6 +540,14 @@
   .couple-photo img {
     max-width: 100%;
     border-radius: 16px;
+  }
+
+  .hero-title {
+    font-size: var(--hero-title-size-mobile);
+  }
+
+  .section-title.script {
+    font-size: var(--section-title-size-mobile);
   }
 }
 

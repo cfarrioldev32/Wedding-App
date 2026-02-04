@@ -1,9 +1,9 @@
 ﻿<main class="invitation-page">
   <section class="invitation-shell">
-    <div class="shell-watermark" aria-hidden="true"></div>
     <img class="stamp stamp-left" [src]="POSTAL_STAMP_PATH" alt="" aria-hidden="true" />
     <img class="stamp stamp-right" [src]="POSTAL_STAMP_PATH" alt="" aria-hidden="true" />
 
+    <div class="invitation-content">
     <header class="hero">
       <p class="hero-eyebrow">Nos Casamos</p>
       <h1 class="hero-title">Cristian & Carmen</h1>
@@ -20,7 +20,7 @@
     <section class="countdown-section" aria-label="Cuenta regresiva">
       <h2 class="section-title script">
         <span class="section-icon" aria-hidden="true">⏳</span>
-        Cuenta regresiva para el viaje de nuestra vida
+        Cuenta regresiva
       </h2>
       <app-countdown [targetDate]="targetDate"></app-countdown>
     </section>
@@ -162,5 +162,6 @@
     >
       <span aria-hidden="true">{{ isMusicPlaying ? '🔇' : '🎵' }}</span>
     </button>
+    </div>
   </section>
 </main>
