@@ -1,24 +1,25 @@
-Ôªøimport { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { CountdownComponent } from './invitation-countdown.component';
 import { MusicService } from '../../services/music.service';
+import { RevealOnScrollDirective } from '../../directives/reveal-on-scroll.directive';
 
 @Component({
   selector: 'app-invitation-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, RouterLink, CountdownComponent],
+  imports: [CommonModule, MatButtonModule, RouterLink, CountdownComponent, RevealOnScrollDirective],
   templateUrl: './invitation-page.component.html',
   styleUrls: ['./invitation-page.component.scss']
 })
-export class InvitationPageComponent implements OnInit {
+export class InvitationPageComponent implements OnInit, AfterViewInit {
   // TODO: Ajustar fecha real si es necesario.
   readonly targetDate = new Date('2026-10-17T00:00:00');
 
   readonly CEREMONY_NAME = 'El Olivar';
-  readonly CEREMONY_CITY = 'Alcal√° de Henares, Madrid';
-  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcal√° de Henares, Madrid'; // TODO: completar direcci√≥n exacta.
+  readonly CEREMONY_CITY = 'Alcal· de Henares, Madrid';
+  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcal· de Henares, Madrid'; // TODO: completar direcciÛn exacta.
 
   readonly GOOGLE_MAPS_URL = 'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=Kcc9HdaHSUINMVWNKrJE-Z1y&daddr=Cam.+el+Olivar,+9,+28806+Alcal%C3%A1+de+Henares,+Madrid'; // TODO: pegar link exacto de Google Maps.
 
@@ -45,7 +46,7 @@ export class InvitationPageComponent implements OnInit {
 
   readonly giftInfo = {
     title: 'Regalo',
-    text: 'Tu presencia es lo m√°s importante. Si deseas colaborar, aqu√≠ va la info:',
+    text: 'Tu presencia es lo m·s importante. Si deseas colaborar, aquÌ va la info:',
     iban: 'ES49 1465 0100 95 1745599215',
   };
 
@@ -55,16 +56,48 @@ export class InvitationPageComponent implements OnInit {
   readonly INTERACTION_KEY = 'hasUserInteracted';
   showMusicButton = false;
 
-  constructor(private readonly musicService: MusicService) {}
+  constructor(
+    private readonly musicService: MusicService,
+    private readonly hostRef: ElementRef<HTMLElement>,
+    @Inject(DOCUMENT) private readonly documentRef: Document
+  ) {}
 
   ngOnInit(): void {
-    this.musicService.init(this.MUSIC_SRC, 0.3);
-    void this.musicService.play().then(() => {
-      this.showMusicButton = true;
-    });
-    this.showMusicButton = true;
+  }
+  ngAfterViewInit(): void {
+    this.scrollToTop();
+    if (typeof window !== 'undefined') {
+      window.requestAnimationFrame(() => this.scrollToTop());
+    }
   }
 
+  private scrollToTop(): void {
+    const container = this.getScrollContainer();
+    if (container) {
+      container.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      return;
+    }
+
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  }
+
+  private getScrollContainer(): HTMLElement | null {
+    let node: HTMLElement | null = this.hostRef.nativeElement;
+    while (node) {
+      const styles = getComputedStyle(node);
+      const overflowY = styles.overflowY;
+      if ((overflowY === 'auto' || overflowY === 'scroll') && node.scrollHeight > node.clientHeight) {
+        return node;
+      }
+      node = node.parentElement;
+    }
+
+    return this.documentRef.scrollingElement instanceof HTMLElement
+      ? this.documentRef.scrollingElement
+      : null;
+  }
   toggleMusic(): void {
     this.musicService.toggle();
   }
@@ -76,7 +109,7 @@ export class InvitationPageComponent implements OnInit {
   get googleCalendarLink(): string {
     const title = 'Boda Cristian & Carmen';
     const location = `${this.CEREMONY_NAME}, ${this.CEREMONY_CITY}`;
-    const details = 'Ceremonia y celebraci√≥n';
+    const details = 'Ceremonia y celebraciÛn';
     const start = '20261017T180000';
     const end = '20261017T230000';
 
@@ -136,3 +169,4 @@ export class InvitationPageComponent implements OnInit {
     }
   }
 }
+

@@ -71,6 +71,25 @@
   z-index: 1;
 }
 
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 520ms ease-out, transform 520ms ease-out;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @keyframes mapScroll {
   from {
     background-position: 0 0;

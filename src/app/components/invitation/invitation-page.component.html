@@ -17,7 +17,7 @@
       <img src="/cyc.png" alt="Cristian y Carmen" />
     </section>
 
-    <section class="countdown-section" aria-label="Cuenta regresiva">
+    <section class="countdown-section" aria-label="Cuenta regresiva" revealOnScroll>
       <h2 class="section-title script">
         <span class="section-icon" aria-hidden="true">⏳</span>
         Cuenta regresiva
@@ -25,7 +25,7 @@
       <app-countdown [targetDate]="targetDate"></app-countdown>
     </section>
 
-    <section class="location-section">
+    <section class="location-section" revealOnScroll>
       <h2 class="section-title script">
         <span class="section-icon" aria-hidden="true">📍</span>
         Celebración
@@ -54,7 +54,7 @@
       <p class="section-helper" *ngIf="!mapsUrl">Ubicación exacta a confirmar.</p>
     </section>
 
-    <section class="dress-section">
+    <section class="dress-section" revealOnScroll>
       <h2 class="section-title script">
         <span class="section-icon" aria-hidden="true">
           <svg
@@ -77,7 +77,7 @@
       <p class="section-subtext">Sugerimos tonos neutros y un look elegante.</p>
     </section>
 
-    <section class="timeline-section" aria-label="Itinerario">
+    <section class="timeline-section" aria-label="Itinerario" revealOnScroll>
       <h2 class="section-title script">
         <span class="section-icon" aria-hidden="true">🕘</span>
         Itinerario
@@ -113,7 +113,7 @@
       </div>
     </section>
 
-    <section class="gift-section">
+    <section class="gift-section" revealOnScroll>
       <h2 class="section-title script">
         <span class="section-icon" aria-hidden="true">🎁</span>
         {{ giftInfo.title }}
@@ -139,7 +139,7 @@
       </div>
     </section>
 
-    <footer class="cta">
+    <footer class="cta" revealOnScroll>
       <a
         mat-stroked-button
         color="primary"
