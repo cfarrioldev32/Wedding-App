@@ -44,7 +44,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
 
   readonly giftInfo = {
     title: 'Regalo',
-    text: 'Vení, festejá y disfrutá. Lo más importante es que vengas y pasarlo piola. Si además querés ayudarnos en esta aventura ❤️',
+    text: 'Vení, festejá y disfrutá. Lo más importante es que nos acompañes en este día tan especial y pasarlo piola. Si además querés ayudarnos en esta aventura ❤️',
     iban: 'ES49 1465 0100 95 1745599215',
   };
 

@@ -166,8 +166,20 @@
 .hero-date {
   margin: 0;
   font-size: 0.95rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
+  color: var(--ink);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-date::before,
+.hero-date::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(199, 123, 123, 0.6), transparent);
 }
 
 .couple-photo {
@@ -703,6 +715,37 @@
   box-shadow: 0 16px 30px rgba(31, 24, 18, 0.18);
 }
 
+.closing-epigraph {
+  margin: 3.2rem 0 0;
+  padding: 2.6rem 0 1.2rem;
+  text-align: center;
+  font-family: var(--title-font-family);
+  font-weight: 600;
+  font-size: 1.7rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  position: relative;
+}
+
+.closing-epigraph::before,
+.closing-epigraph::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 140px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(199, 123, 123, 0.55), transparent);
+  transform: translateX(-50%);
+}
+
+.closing-epigraph::before {
+  top: 0.9rem;
+}
+
+.closing-epigraph::after {
+  bottom: 0.6rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .music-toggle {
     transition: none;
@@ -723,7 +766,7 @@
   .couple-photo img {
     max-width: 100%;
     border-radius: 16px;
-    height: 350px;
+    height: 250px;
   }
 
   .timeline-image {
@@ -738,6 +781,10 @@
 
   .section-title.script {
     font-size: var(--section-title-size-mobile);
+  }
+
+  .closing-epigraph {
+    font-size: 1.45rem;
   }
 
   .countdown-title {
