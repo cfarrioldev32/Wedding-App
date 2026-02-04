@@ -57,7 +57,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
 
   ibanCopied = false;
 
-  readonly MUSIC_SRC = '/assets/music/invitation.mp3';
+  readonly MUSIC_SRC = '/assets/music/invitacion.mp3';
   readonly INTERACTION_KEY = 'hasUserInteracted';
   showMusicButton = false;
 
