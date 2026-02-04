@@ -210,6 +210,10 @@
   text-align: center;
 }
 
+.countdown-title {
+  gap: 0.35rem;
+}
+
 .section-icon {
   width: 22px;
   height: 22px;
@@ -734,6 +738,10 @@
 
   .section-title.script {
     font-size: var(--section-title-size-mobile);
+  }
+
+  .countdown-title {
+    gap: 0.25rem;
   }
 
   .section-text {
