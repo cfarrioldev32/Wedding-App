@@ -14,8 +14,8 @@
   --title-font-weight: 600;
   --title-letter-spacing: 0.01em;
   --title-line-height: 1.1;
-  --subtitle-font-family: 'Dancing Script', 'Times New Roman', serif;
-  --subtitle-font-weight: 500;
+  --subtitle-font-family: unset;
+  --subtitle-font-weight: unset;
   --hero-title-size-desktop: 2.5rem;
   --hero-title-size-mobile: 3.36rem;
   --section-title-size-desktop: 1.8rem;
@@ -238,8 +238,8 @@
   line-height: 1.6;
   font-size: 0.95rem;
   text-align: center;
-  font-family: var(--subtitle-font-family);
-  font-weight: var(--subtitle-font-weight);
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 .location-highlight {
@@ -252,8 +252,8 @@
   color: var(--muted);
   font-size: 0.9rem;
   text-align: center;
-  font-family: var(--subtitle-font-family);
-  font-weight: var(--subtitle-font-weight);
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 .section-helper {
@@ -261,8 +261,8 @@
   color: var(--muted);
   font-size: 0.85rem;
   text-align: center;
-  font-family: var(--subtitle-font-family);
-  font-weight: var(--subtitle-font-weight);
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 .countdown-section,
