@@ -18,8 +18,8 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
   readonly targetDate = new Date('2026-10-17T00:00:00');
 
   readonly CEREMONY_NAME = 'El Olivar';
-  readonly CEREMONY_CITY = 'Alcal� de Henares, Madrid';
-  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcal� de Henares, Madrid'; // TODO: completar direcci�n exacta.
+  readonly CEREMONY_CITY = 'Alcalá de Henares, Madrid';
+  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalá de Henares, Madrid'; // TODO: completar direcci�n exacta.
 
   readonly GOOGLE_MAPS_URL = 'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=Kcc9HdaHSUINMVWNKrJE-Z1y&daddr=Cam.+el+Olivar,+9,+28806+Alcal%C3%A1+de+Henares,+Madrid'; // TODO: pegar link exacto de Google Maps.
 

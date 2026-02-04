@@ -34,9 +34,8 @@ export class RevealOnScrollDirective implements AfterViewInit, OnDestroy {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             element.classList.add('is-visible');
-            this.observer?.unobserve(element);
-            this.observer?.disconnect();
-            this.observer = null;
+          } else {
+            element.classList.remove('is-visible');
           }
         });
       },
