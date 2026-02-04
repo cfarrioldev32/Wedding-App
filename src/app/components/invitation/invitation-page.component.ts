@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+ï»¿import { CommonModule, DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
@@ -18,8 +18,8 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
   readonly targetDate = new Date('2026-10-17T00:00:00');
 
   readonly CEREMONY_NAME = 'El Olivar';
-  readonly CEREMONY_CITY = 'Alcalá de Henares, Madrid';
-  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalá de Henares, Madrid'; // TODO: completar dirección exacta.
+  readonly CEREMONY_CITY = 'Alcalï¿½ de Henares, Madrid';
+  readonly ceremonyAddress = 'Cam. el Olivar, 9, 28806 Alcalï¿½ de Henares, Madrid'; // TODO: completar direcciï¿½n exacta.
 
   readonly GOOGLE_MAPS_URL = 'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=Kcc9HdaHSUINMVWNKrJE-Z1y&daddr=Cam.+el+Olivar,+9,+28806+Alcal%C3%A1+de+Henares,+Madrid'; // TODO: pegar link exacto de Google Maps.
 
@@ -46,7 +46,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
 
   readonly giftInfo = {
     title: 'Regalo',
-    text: 'Tu presencia es lo más importante. Si deseas colaborar, aquí va la info:',
+    text: 'Tu presencia es lo mï¿½s importante. Si deseas colaborar, aquï¿½ va la info:',
     iban: 'ES49 1465 0100 95 1745599215',
   };
 
@@ -64,10 +64,19 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.musicService.init(this.MUSIC_SRC, 0.3);
-    void this.musicService.play().then(() => {
-      this.showMusicButton = true;
-    });
     this.showMusicButton = true;
+    void this.musicService.play().catch(() => {
+      // Some browsers block autoplay; retry on first user interaction.
+      const resume = () => {
+        this.documentRef.removeEventListener('pointerdown', resume);
+        this.documentRef.removeEventListener('touchstart', resume);
+        this.documentRef.removeEventListener('keydown', resume);
+        void this.musicService.play();
+      };
+      this.documentRef.addEventListener('pointerdown', resume, { once: true });
+      this.documentRef.addEventListener('touchstart', resume, { once: true });
+      this.documentRef.addEventListener('keydown', resume, { once: true });
+    });
   }
   ngAfterViewInit(): void {
     this.scrollToTop();
@@ -114,7 +123,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
   get googleCalendarLink(): string {
     const title = 'Boda Cristian & Carmen';
     const location = `${this.CEREMONY_NAME}, ${this.CEREMONY_CITY}`;
-    const details = 'Ceremonia y celebración';
+    const details = 'Ceremonia y celebraciï¿½n';
     const start = '20261017T180000';
     const end = '20261017T230000';
 
