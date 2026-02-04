@@ -36,8 +36,6 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
   readonly MAP_WATERMARK_PATH = '/assets/images/mapa-vintage.jpg';
   readonly POSTAL_STAMP_PATH = '/assets/invitation/postal-stamp.svg';
 
-  readonly dressCode = 'Formal';
-
   readonly itinerary = [
     { time: '18:00', label: 'Llegada', icon: 'arrival' },
     { time: '18:30', label: 'Ceremonia', icon: 'rings' },
@@ -46,7 +44,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
 
   readonly giftInfo = {
     title: 'Regalo',
-    text: 'Tu presencia es lo más importante. Si deseas colaborar, aquí va la info:',
+    text: 'Vení, festejá y disfrutá. Lo más importante es que vengas y pasarlo piola. Si además querés ayudarnos en esta aventura ❤️',
     iban: 'ES49 1465 0100 95 1745599215',
   };
 
@@ -191,16 +189,11 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   pausePolaroidAutoplay(): void {
-    if (this.autoplayPaused) {
-      return;
-    }
     this.autoplayPaused = true;
-    this.stopPolaroidAutoplay();
   }
 
   resumePolaroidAutoplay(): void {
     this.autoplayPaused = false;
-    this.startPolaroidAutoplay();
   }
 
   private startPolaroidAutoplay(): void {
@@ -221,7 +214,7 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
         return;
       }
       this.scrollPolaroids(1);
-    }, 5500);
+    }, 4500);
   }
 
   private stopPolaroidAutoplay(): void {

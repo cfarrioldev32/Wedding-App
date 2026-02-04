@@ -10,14 +10,17 @@
   --mapOverlayGradient: linear-gradient(180deg, rgba(255, 251, 244, 0.7), rgba(255, 251, 244, 0.92));
   --mapTileWidth: 800px;
   --radius: 16px;
-  --title-font-family: 'Brush Script MT', 'Times New Roman', serif;
-  --title-font-weight: 400;
-  --title-letter-spacing: 0;
-  --title-line-height: normal;
+  --title-font-family: 'Dancing Script', 'Times New Roman', serif;
+  --title-font-weight: 600;
+  --title-letter-spacing: 0.01em;
+  --title-line-height: 1.1;
+  --subtitle-font-family: 'Dancing Script', 'Times New Roman', serif;
+  --subtitle-font-weight: 500;
   --hero-title-size-desktop: 2.5rem;
-  --hero-title-size-mobile: 2.5rem;
+  --hero-title-size-mobile: 3.36rem;
   --section-title-size-desktop: 1.8rem;
-  --section-title-size-mobile: 1.8rem;
+  --section-title-size-mobile: 2.419rem;
+  --subtitle-scale-mobile: 1.28;
 }
 
 .invitation-page {
@@ -221,6 +224,8 @@
   line-height: 1.6;
   font-size: 0.95rem;
   text-align: center;
+  font-family: var(--subtitle-font-family);
+  font-weight: var(--subtitle-font-weight);
 }
 
 .location-highlight {
@@ -233,6 +238,8 @@
   color: var(--muted);
   font-size: 0.9rem;
   text-align: center;
+  font-family: var(--subtitle-font-family);
+  font-weight: var(--subtitle-font-weight);
 }
 
 .section-helper {
@@ -240,6 +247,8 @@
   color: var(--muted);
   font-size: 0.85rem;
   text-align: center;
+  font-family: var(--subtitle-font-family);
+  font-weight: var(--subtitle-font-weight);
 }
 
 .countdown-section,
@@ -714,6 +723,29 @@
 
   .section-title.script {
     font-size: var(--section-title-size-mobile);
+  }
+
+  .section-text {
+    font-size: calc(0.95rem * var(--subtitle-scale-mobile));
+  }
+
+  .section-subtext {
+    font-size: calc(0.9rem * var(--subtitle-scale-mobile));
+  }
+
+  .section-helper {
+    font-size: calc(0.85rem * var(--subtitle-scale-mobile));
+  }
+
+  .section-icon {
+    width: calc(22px * 1.344);
+    height: calc(22px * 1.344);
+    font-size: calc(1.15rem * 1.344);
+  }
+
+  .section-icon svg {
+    width: calc(22px * 1.344);
+    height: calc(22px * 1.344);
   }
 }
 
