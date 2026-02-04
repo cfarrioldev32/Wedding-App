@@ -1,5 +1,5 @@
 ﻿import { CommonModule, DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { CountdownComponent } from './invitation-countdown.component';
@@ -13,7 +13,7 @@ import { RevealOnScrollDirective } from '../../directives/reveal-on-scroll.direc
   templateUrl: './invitation-page.component.html',
   styleUrls: ['./invitation-page.component.scss']
 })
-export class InvitationPageComponent implements OnInit, AfterViewInit {
+export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy {
   // TODO: Ajustar fecha real si es necesario.
   readonly targetDate = new Date('2026-10-17T00:00:00');
 
@@ -50,11 +50,22 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
     iban: 'ES49 1465 0100 95 1745599215',
   };
 
+  readonly polaroidImages = [
+    { file: 'gatitos_1.jpg', alt: 'Recuerdo 1', tilt: '-2deg' },
+    { file: 'gatitos_2.jpg', alt: 'Recuerdo 2', tilt: '1.2deg' },
+    { file: 'gatitos_3.jpg', alt: 'Recuerdo 3', tilt: '-1.4deg' },
+    { file: 'gatitos_4.jpg', alt: 'Recuerdo 4', tilt: '2.1deg' }
+  ];
+
   ibanCopied = false;
 
   readonly MUSIC_SRC = '/assets/music/invitation.mp3';
   readonly INTERACTION_KEY = 'hasUserInteracted';
   showMusicButton = false;
+
+  @ViewChild('polaroidTrack') polaroidTrack?: ElementRef<HTMLElement>;
+  private autoplayId: number | null = null;
+  private autoplayPaused = false;
 
   constructor(
     private readonly musicService: MusicService,
@@ -83,6 +94,13 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
     if (typeof window !== 'undefined') {
       window.requestAnimationFrame(() => this.scrollToTop());
     }
+    if (typeof window !== 'undefined') {
+      window.setTimeout(() => this.startPolaroidAutoplay(), 0);
+    }
+  }
+  
+  ngOnDestroy(): void {
+    this.stopPolaroidAutoplay();
   }
 
   private scrollToTop(): void {
@@ -138,6 +156,81 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
     return `https://calendar.google.com/calendar/render?${params.toString()}`;
   }
 
+  scrollPolaroids(direction: -1 | 1): void {
+    const track = this.polaroidTrack?.nativeElement;
+    if (!track) {
+      return;
+    }
+    const card = track.querySelector<HTMLElement>('.polaroid-card');
+    const cardWidth = card ? card.offsetWidth : 260;
+    const gap = 16;
+    const step = (cardWidth + gap) * direction;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const next = track.scrollLeft + step;
+    if (direction > 0 && next >= maxScroll - 8) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+      return;
+    }
+    if (direction < 0 && next <= 0) {
+      track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      return;
+    }
+    track.scrollBy({ left: step, behavior: 'smooth' });
+  }
+
+  onPolaroidKeydown(event: KeyboardEvent): void {
+    this.pausePolaroidAutoplay();
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      this.scrollPolaroids(1);
+    }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.scrollPolaroids(-1);
+    }
+  }
+
+  pausePolaroidAutoplay(): void {
+    if (this.autoplayPaused) {
+      return;
+    }
+    this.autoplayPaused = true;
+    this.stopPolaroidAutoplay();
+  }
+
+  resumePolaroidAutoplay(): void {
+    this.autoplayPaused = false;
+    this.startPolaroidAutoplay();
+  }
+
+  private startPolaroidAutoplay(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    if (!this.polaroidTrack?.nativeElement) {
+      return;
+    }
+    if (this.autoplayId !== null) {
+      return;
+    }
+    this.autoplayId = window.setInterval(() => {
+      if (this.autoplayPaused) {
+        return;
+      }
+      this.scrollPolaroids(1);
+    }, 5500);
+  }
+
+  private stopPolaroidAutoplay(): void {
+    if (this.autoplayId !== null) {
+      window.clearInterval(this.autoplayId);
+      this.autoplayId = null;
+    }
+  }
+
   copyIban(): void {
     const iban = this.giftInfo.iban;
     if (!iban || typeof window === 'undefined') {
@@ -183,5 +276,3 @@ export class InvitationPageComponent implements OnInit, AfterViewInit {
     }
   }
 }
-
-

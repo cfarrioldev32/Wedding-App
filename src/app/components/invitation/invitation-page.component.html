@@ -85,6 +85,50 @@
       <img class="timeline-image" src="/itinerario.png" alt="Itinerario del evento" />
     </section>
 
+    <section class="polaroid-section" aria-label="Recuerdos" revealOnScroll>
+      <h2 class="section-title script">
+        <span class="section-icon" aria-hidden="true">📷</span>
+        Recuerdos
+      </h2>
+      <div
+        class="polaroid-carousel"
+        (mouseenter)="pausePolaroidAutoplay()"
+        (mouseleave)="resumePolaroidAutoplay()"
+      >
+        <button
+          class="polaroid-nav polaroid-nav--prev"
+          type="button"
+          (click)="pausePolaroidAutoplay(); scrollPolaroids(-1)"
+          aria-label="Ver fotos anteriores"
+        >
+          ‹
+        </button>
+        <div
+          class="polaroid-track"
+          #polaroidTrack
+          tabindex="0"
+          (keydown)="onPolaroidKeydown($event)"
+          (pointerdown)="pausePolaroidAutoplay()"
+          (wheel)="pausePolaroidAutoplay()"
+          (focusin)="pausePolaroidAutoplay()"
+        >
+          <figure class="polaroid-card" *ngFor="let photo of polaroidImages" [style.--tilt]="photo.tilt">
+            <div class="polaroid-frame">
+              <img [src]="'/assets/polaroid/' + photo.file" [alt]="photo.alt" loading="lazy" />
+            </div>
+          </figure>
+        </div>
+        <button
+          class="polaroid-nav polaroid-nav--next"
+          type="button"
+          (click)="pausePolaroidAutoplay(); scrollPolaroids(1)"
+          aria-label="Ver fotos siguientes"
+        >
+          ›
+        </button>
+      </div>
+    </section>
+
     <section class="gift-section" revealOnScroll>
       <h2 class="section-title script">
         <span class="section-icon" aria-hidden="true">🎁</span>
