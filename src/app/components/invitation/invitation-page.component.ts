@@ -172,11 +172,11 @@ export class InvitationPageComponent implements OnInit, AfterViewInit, OnDestroy
     const step = (cardWidth + gap) * direction;
     const maxScroll = track.scrollWidth - track.clientWidth;
     const next = track.scrollLeft + step;
-    if (direction > 0 && next >= maxScroll - 8) {
+    if (direction > 0 && next > maxScroll + 4) {
       track.scrollTo({ left: 0, behavior: 'smooth' });
       return;
     }
-    if (direction < 0 && next <= 0) {
+    if (direction < 0 && next < -4) {
       track.scrollTo({ left: maxScroll, behavior: 'smooth' });
       return;
     }
