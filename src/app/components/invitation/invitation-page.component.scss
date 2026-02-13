@@ -59,6 +59,12 @@
   animation: mapScroll 45s linear infinite;
 }
 
+@media (min-width: 768px) {
+  .invitation-shell {
+    padding: 0;
+  }
+}
+
 .invitation-shell::after {
   content: "";
   position: absolute;
