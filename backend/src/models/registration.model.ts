@@ -5,6 +5,8 @@ export interface RegistrationDocument {
   firstName: string;
   lastName: string;
   country: string;
+  attendanceConfirmed: boolean;
+  attendeesCount: number;
   createdAt: Date;
 }
 
@@ -13,6 +15,8 @@ const registrationSchema = new Schema<RegistrationDocument>({
   firstName: { type: String, required: true, trim: true },
   lastName: { type: String, required: true, trim: true },
   country: { type: String, required: true, trim: true },
+  attendanceConfirmed: { type: Boolean, required: true },
+  attendeesCount: { type: Number, required: true, min: 0 },
   createdAt: { type: Date, default: () => new Date() }
 });
 

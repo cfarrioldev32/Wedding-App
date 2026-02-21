@@ -5,19 +5,28 @@ export const createRegistration = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const { email, firstName, lastName, country } = req.body as {
+  const { email, firstName, lastName, country, attendanceConfirmed, attendeesCount } = req.body as {
     email: string;
     firstName: string;
     lastName: string;
     country: string;
+    attendanceConfirmed: boolean;
+    attendeesCount: number;
   };
   const result = await registrationService.createRegistration({
     email,
     firstName,
     lastName,
-    country
+    country,
+    attendanceConfirmed,
+    attendeesCount
   });
-  res.status(201).json({ id: result.id, createdAt: result.createdAt.toISOString() });
+  res.status(201).json({
+    id: result.id,
+    createdAt: result.createdAt.toISOString(),
+    attendanceConfirmed,
+    attendeesCount: attendanceConfirmed ? attendeesCount : 0
+  });
 };
 
 export const listRegistrations = async (

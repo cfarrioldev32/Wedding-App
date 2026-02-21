@@ -5,12 +5,17 @@ export const createRegistration = async (payload: {
   firstName: string;
   lastName: string;
   country: string;
+  attendanceConfirmed: boolean;
+  attendeesCount: number;
 }): Promise<{ id: string; createdAt: Date }> => {
+  const normalizedAttendees = payload.attendanceConfirmed ? payload.attendeesCount : 0;
   const registration = await RegistrationModel.create({
     email: payload.email,
     firstName: payload.firstName,
     lastName: payload.lastName,
-    country: payload.country
+    country: payload.country,
+    attendanceConfirmed: payload.attendanceConfirmed,
+    attendeesCount: normalizedAttendees
   });
 
   return { id: registration.id, createdAt: registration.createdAt };

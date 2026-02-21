@@ -107,6 +107,31 @@
             <input type="text" formControlName="pais" placeholder="Argentina, Espana..." />
           </label>
 
+          <div class="passport-field attendance-field">
+            <span>¿Confirmas tu asistencia a nuestra boda?</span>
+            <div class="attendance-options" role="radiogroup" aria-label="Confirmación de asistencia">
+              <label class="attendance-option">
+                <input type="radio" formControlName="attendanceConfirmed" [value]="true" />
+                <span>SIII</span>
+              </label>
+              <label class="attendance-option">
+                <input type="radio" formControlName="attendanceConfirmed" [value]="false" />
+                <span>Me encantaría pero no 😢</span>
+              </label>
+            </div>
+          </div>
+
+          <label class="passport-field">
+            <span>Número de asistentes</span>
+            <select
+              formControlName="attendeesCount"
+              [class.is-disabled]="registroForm.get('attendeesCount')?.disabled"
+            >
+              <option [value]="0" disabled hidden>0</option>
+              <option *ngFor="let count of guestOptions" [value]="count">{{ count }}</option>
+            </select>
+          </label>
+
           <button
             type="submit"
             mat-flat-button

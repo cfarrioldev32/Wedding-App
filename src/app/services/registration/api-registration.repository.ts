@@ -20,7 +20,9 @@ export class ApiRegistrationRepository implements RegistrationRepository {
         email: payload.email,
         firstName: payload.firstName,
         lastName: payload.lastName,
-        country: payload.country
+        country: payload.country,
+        attendanceConfirmed: payload.attendanceConfirmed,
+        attendeesCount: payload.attendeesCount
       })
       .pipe(map(() => undefined));
   }

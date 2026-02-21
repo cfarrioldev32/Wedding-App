@@ -15,6 +15,8 @@ import { getGuestEmail, setGuestSession } from '../../services/session/session-s
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
+  readonly MAX_GUESTS = 5;
+  readonly guestOptions = Array.from({ length: this.MAX_GUESTS }, (_, index) => index + 1);
   registroForm: FormGroup;
   sellando: boolean = false;
   sellado: boolean = false;
@@ -45,19 +47,20 @@ export class RegisterFormComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      pais: ['', Validators.required]
-    });
+      pais: ['', Validators.required],
+      attendanceConfirmed: [null, Validators.required],
+      attendeesCount: [{ value: 0, disabled: true }, [Validators.min(0), Validators.max(this.MAX_GUESTS)]]
+    }, { validators: [this.attendanceValidator.bind(this)] });
   }
 
   ngOnInit(): void {
-    if (this.reduceMotion) {
-      return;
+    this.setupAttendanceControls();
+    if (!this.reduceMotion) {
+      this.isOpening = true;
+      setTimeout(() => {
+        this.isOpening = false;
+      }, this.openDurationMs);
     }
-    this.isOpening = true;
-    setTimeout(() => {
-      this.isOpening = false;
-    }, this.openDurationMs);
-
     this.loadExistingQuizResult();
   }
 
@@ -71,7 +74,13 @@ export class RegisterFormComponent implements OnInit {
         apellido: string;
         email: string;
         pais: string;
+        attendanceConfirmed: boolean | string | null;
+        attendeesCount: number;
       };
+      const attendanceConfirmed = this.normalizeAttendance(formValue.attendanceConfirmed);
+      if (attendanceConfirmed === null) {
+        return;
+      }
 
       setGuestSession({
         email: formValue.email.trim(),
@@ -83,7 +92,9 @@ export class RegisterFormComponent implements OnInit {
           email: formValue.email.trim(),
           firstName: formValue.nombre.trim(),
           lastName: formValue.apellido.trim(),
-          country: formValue.pais.trim()
+          country: formValue.pais.trim(),
+          attendanceConfirmed,
+          attendeesCount: attendanceConfirmed ? formValue.attendeesCount : 0
         })
         .subscribe({
           error: (error) => {
@@ -112,6 +123,47 @@ export class RegisterFormComponent implements OnInit {
         });
       }, this.stampDurationMs);
     }
+  }
+
+  private setupAttendanceControls(): void {
+    const attendanceCtrl = this.registroForm.get('attendanceConfirmed');
+    const attendeesCtrl = this.registroForm.get('attendeesCount');
+    attendanceCtrl?.valueChanges.subscribe((value) => {
+      const normalized = this.normalizeAttendance(value);
+      if (normalized === true) {
+        attendeesCtrl?.enable({ emitEvent: false });
+        if (!attendeesCtrl?.value || attendeesCtrl.value < 1) {
+          attendeesCtrl?.setValue(1, { emitEvent: false });
+        }
+        return;
+      }
+      if (normalized === false) {
+        attendeesCtrl?.setValue(0, { emitEvent: false });
+        attendeesCtrl?.disable({ emitEvent: false });
+      }
+    });
+  }
+
+  private attendanceValidator(group: FormGroup): { [key: string]: boolean } | null {
+    const attendance = this.normalizeAttendance(group.get('attendanceConfirmed')?.value);
+    const count = group.get('attendeesCount')?.value;
+    if (attendance === true && (!count || count < 1)) {
+      return { attendeesRequired: true };
+    }
+    if (attendance === false && count !== 0) {
+      return { attendeesMustBeZero: true };
+    }
+    return null;
+  }
+
+  private normalizeAttendance(value: unknown): boolean | null {
+    if (value === true || value === 'true') {
+      return true;
+    }
+    if (value === false || value === 'false') {
+      return false;
+    }
+    return null;
   }
 
   private loadExistingQuizResult(): void {

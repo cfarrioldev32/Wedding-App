@@ -5,6 +5,8 @@ export interface RegistrationPayload {
   firstName: string;
   lastName: string;
   country: string;
+  attendanceConfirmed: boolean;
+  attendeesCount: number;
 }
 
 export interface RegistrationRepository {
