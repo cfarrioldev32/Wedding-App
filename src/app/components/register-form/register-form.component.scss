@@ -579,16 +579,17 @@
 @media (max-width: 599px) {
   .passport-photo {
     width: 100%;
-    padding: 0.25rem;
+    padding: 0.2rem;
     aspect-ratio: 3 / 4;
   }
 
   .passport-photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     transform: none;
+    border-width: 3px;
   }
 
   .map-anchor--ar {
