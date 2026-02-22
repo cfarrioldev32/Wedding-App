@@ -9,6 +9,7 @@ export const registrationSchema = z
     attendanceConfirmed: z.boolean(),
     attendeesCount: z.number().int().min(0).max(5)
   })
+  .strict()
   .superRefine((value, ctx) => {
     if (value.attendanceConfirmed && value.attendeesCount < 1) {
       ctx.addIssue({
@@ -24,5 +25,4 @@ export const registrationSchema = z
         path: ['attendeesCount']
       });
     }
-  })
-  .strict();
+  });

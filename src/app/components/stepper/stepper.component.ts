@@ -83,9 +83,9 @@ export class StepperComponent implements OnDestroy {
       imageUrl: '/quiz/persona-1.png',
       imageAlt: 'Persona 1',
       options: [
-        { id: 'A', label: 'Amiga de la novia', points: 10 },
+        { id: 'A', label: 'Amiga de la novia', points: 0 },
         { id: 'B', label: 'Prima segunda del novio', points: 0 },
-        { id: 'C', label: 'Mejor amiga de la novia', points: 0 }
+        { id: 'C', label: 'Mejor amiga de la novia', points: 10 }
       ]
     },
     {
