@@ -6,8 +6,8 @@ export const registrationSchema = z
     firstName: z.string().min(1).max(80),
     lastName: z.string().min(1).max(80),
     country: z.string().min(2).max(56),
-    attendanceConfirmed: z.boolean(),
-    attendeesCount: z.number().int().min(0).max(5)
+    attendanceConfirmed: z.coerce.boolean(),
+    attendeesCount: z.coerce.number().int().min(0).max(5)
   })
   .strict()
   .superRefine((value, ctx) => {
