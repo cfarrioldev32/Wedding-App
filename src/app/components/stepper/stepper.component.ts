@@ -79,7 +79,7 @@ export class StepperComponent implements OnDestroy {
     // TODO: Copiar las imagenes a /public/quiz y actualizar estas rutas.
     {
       id: 'q1',
-      text: 'Quien es esta persona?',
+      text: 'Quién es esta persona?',
       imageUrl: '/quiz/persona-1.png',
       imageAlt: 'Persona 1',
       options: [
@@ -90,7 +90,7 @@ export class StepperComponent implements OnDestroy {
     },
     {
       id: 'q2',
-      text: 'A quien pertenece esta mascota?',
+      text: 'A quién pertenece esta mascota?',
       imageUrl: '/quiz/mascota-1.png',
       imageAlt: 'Mascota',
       options: [
@@ -101,7 +101,7 @@ export class StepperComponent implements OnDestroy {
     },
     {
       id: 'q3',
-      text: 'Quien es esta persona?',
+      text: 'Quién es esta persona?',
       imageUrl: '/quiz/persona-2.png',
       imageAlt: 'Persona 2',
       options: [
@@ -112,11 +112,11 @@ export class StepperComponent implements OnDestroy {
     },
     {
       id: 'q4',
-      text: 'Donde se tomo esta foto?',
+      text: 'Dónde se tomo esta foto?',
       imageUrl: '/quiz/foto-roma.png',
       imageAlt: 'Foto en Roma',
       options: [
-        { id: 'A', label: 'Paris', points: 0 },
+        { id: 'A', label: 'París', points: 0 },
         { id: 'B', label: 'Roma', points: 0 },
         { id: 'C', label: 'Argentina', points: 10 }
       ]

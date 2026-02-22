@@ -193,13 +193,13 @@ export class RegisterFormComponent implements OnInit {
 
   private getRankingText(percent: number): string {
     if (percent < 40) {
-      return 'Bien ahí, nos conocés bien 😎';
+      return 'Tenés que conocernos mejor, cuando quieras nos tomamos una birrita 🍺';
     }
 
     if (percent <= 70) {
-      return 'Buen nivel';
+      return 'Nos conocés bastante bien 😎';
     }
 
-    return 'Creo que nos conoce más el carnicero de nuestro barrio que vos, pero no importa, te queremos';
+    return 'Nos conocés al detalle!! ❤️';
   }
 }
